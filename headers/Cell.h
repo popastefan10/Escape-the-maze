@@ -37,7 +37,7 @@ public:
     friend std::ostream & operator << (std::ostream &, const Cell &);
 
     // getters / setters
-    [[maybe_unused]] CellType getCellType(CellType);
+    [[maybe_unused]] CellType getCellType();
     [[maybe_unused]] void setCellType(CellType);
 
     // draw derived din sf::Drawable

@@ -2,7 +2,7 @@
 
 int main() {
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+    sf::RenderWindow window(sf::VideoMode(465, 465), "Escape the Maze");
     Game game(window, "resources/mapConfig.txt");
     game.start();
 

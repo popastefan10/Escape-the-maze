@@ -35,6 +35,9 @@ public:
 
     // draw derived din sf::Drawable
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const;
+
+    bool isInside(const sf::Vector2i &);
+    bool isFree(const sf::Vector2i &);
 };
 
 

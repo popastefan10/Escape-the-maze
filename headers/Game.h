@@ -6,6 +6,7 @@
 #define OOP_GAME_H
 
 #include "Map.h"
+#include "Player.h"
 #include <string>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -15,6 +16,7 @@
 class Game {
     sf::RenderWindow &window;
     Map map;
+    Player player;
 
 public:
     // constructors

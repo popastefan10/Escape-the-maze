@@ -41,7 +41,7 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
 }
 
 // getters / setters
-[[maybe_unused]] Cell::CellType Cell::getCellType(Cell::CellType) {
+[[maybe_unused]] Cell::CellType Cell::getCellType() {
     return cellType;
 }
 
@@ -54,16 +54,26 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates) const {
     sf::RectangleShape rectangle(sf::Vector2f{height, width});
     rectangle.setPosition(position);
 
+    sf::Texture wallTexture;
+    wallTexture.loadFromFile("resources/bedrock.png");
+
+    sf::Texture floorTexture;
+    floorTexture.loadFromFile("resources/smooth_stone.png");
+
     switch(cellType) {
-        case Cell::Wall:
-            rectangle.setFillColor(Cell::wallColor);
+        case Cell::Wall: {
+//            rectangle.setFillColor(Cell::wallColor);
+            rectangle.setTexture(&wallTexture);
             break;
-        case Cell::Floor:
-            rectangle.setFillColor(Cell::floorColor);
+        }
+        case Cell::Floor: {
+            rectangle.setTexture(&floorTexture);
             break;
-        default:
+        }
+        default: {
             rectangle.setFillColor(Cell::undefinedColor);
             break;
+        }
     }
     target.draw(rectangle);
 }

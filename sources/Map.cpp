@@ -76,3 +76,11 @@ void Map::draw(sf::RenderTarget &target, sf::RenderStates) const {
         for(int j = 0; j < width; j++)
             target.draw(cells[i][j]);
 }
+
+bool Map::isInside(const sf::Vector2i &position) {
+    return position.x >= 0 && position.x < width && position.y >= 0 && position.y < height;
+}
+
+bool Map::isFree(const sf::Vector2i &position) {
+    return cells[position.y][position.x].getCellType() == Cell::Floor;
+}
