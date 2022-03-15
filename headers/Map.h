@@ -9,20 +9,32 @@
 #include <string>
 #include "Cell.h"
 
-class Map {
-
-private:
+class Map : public sf::Drawable {
     int height;
     int width;
+    float cellHeight;
+    float cellWidth;
     std::vector< std::vector<Cell> > cells;
 
+private:
     void parseConfigFile(const std::string &);
 
 public:
+    // constructors
     Map();
-    Map(std::string);   // Primeste fisier de config
+    [[maybe_unused]] explicit Map(const std::string &);   // config file
 
+    // operators
+    Map & operator = (const Map &);
     friend std::ostream & operator << (std::ostream &, const Map &);
+    const std::vector<Cell> & operator [] (int);
+
+    // getters / setters
+    [[nodiscard]] int getHeight() const;
+    [[maybe_unused]] [[nodiscard]] int getWidth() const;
+
+    // draw derived din sf::Drawable
+    virtual void draw(sf::RenderTarget &, sf::RenderStates) const;
 };
 
 
