@@ -8,6 +8,11 @@
 [[maybe_unused]] Game::Game(sf::RenderWindow &window, const std::string & configFile) :
     window(window), map(configFile), player() {}
 
+[[maybe_unused]] Game::Game(const Game &rhs) = default;
+
+// destructor
+Game::~Game() = default;
+
 void Game::start() {
     std::cout << map;
 

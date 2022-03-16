@@ -23,13 +23,13 @@ void Map::parseConfigFile(const std::string &configFile) {
         for(int j = 0; j < width; j++) {
             switch (crtLine[j]) {
                 case '#':
-                    cells[i].emplace_back(Cell(Cell::Wall, cellHeight, cellWidth, cellPosition));
+                    cells[i].emplace_back(Cell(Cell::Wall, sf::Vector2f{cellHeight, cellWidth}, cellPosition));
                     break;
                 case ' ':
-                    cells[i].emplace_back(Cell(Cell::Floor, cellHeight, cellWidth, cellPosition));
+                    cells[i].emplace_back(Cell(Cell::Floor, sf::Vector2f{cellHeight, cellWidth}, cellPosition));
                     break;
                 default:
-                    cells[i].emplace_back(Cell(Cell::Undefined, cellHeight, cellWidth, cellPosition));
+                    cells[i].emplace_back(Cell(Cell::Undefined, sf::Vector2f{cellHeight, cellWidth}, cellPosition));
                     break;
             }
 
@@ -47,6 +47,17 @@ Map::Map() : height{0}, width{0}, cellHeight{0}, cellWidth{0} {}
 [[maybe_unused]] Map::Map(const std::string &configFile) : height{0}, width{0}, cellHeight{0}, cellWidth{0} {
     parseConfigFile(configFile);
 }
+
+[[maybe_unused]] Map::Map(const Map &rhs) {
+    height = rhs.height;
+    width = rhs.width;
+    cellHeight = rhs.cellHeight;
+    cellWidth = rhs.cellWidth;
+    cells = rhs.cells;
+}
+
+// destructor
+Map::~Map() = default;
 
 // operators
 Map & Map::operator = (const Map &rhs) = default;
@@ -70,14 +81,14 @@ const std::vector<Cell> & Map::operator [] (int line) {
 int Map::getHeight() const { return height; }
 [[maybe_unused]] int Map::getWidth() const { return width; }
 
-// draw derived din sf::Drawable
+// draw inherited din sf::Drawable
 void Map::draw(sf::RenderTarget &target, sf::RenderStates) const {
     for(int i = 0; i < height; i++)
         for(int j = 0; j < width; j++)
             target.draw(cells[i][j]);
 }
 
-bool Map::isInside(const sf::Vector2i &position) {
+bool Map::isInside(const sf::Vector2i &position) const {
     return position.x >= 0 && position.x < width && position.y >= 0 && position.y < height;
 }
 

@@ -19,18 +19,16 @@ public:
 
 private:
     CellType cellType;
-    float height;
-    float width;
+    sf::Vector2f size;
     sf::Vector2f position;
-
-    static const sf::Color wallColor;
-    static const sf::Color floorColor;
-    static const sf::Color undefinedColor;
 
 public:
     // constructors
-    explicit Cell(CellType = Cell::Undefined, float = 0, float = 0, sf::Vector2f = sf::Vector2f{});
+    explicit Cell(CellType = Cell::Undefined, sf::Vector2f = sf::Vector2f{}, sf::Vector2f = sf::Vector2f{});
     Cell(const Cell &);
+
+    //destructor
+    ~Cell();
 
     // operators
     Cell & operator = (const Cell &);
@@ -40,7 +38,7 @@ public:
     [[maybe_unused]] CellType getCellType();
     [[maybe_unused]] void setCellType(CellType);
 
-    // draw derived din sf::Drawable
+    // draw inherited din sf::Drawable
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const;
 };
 

@@ -4,22 +4,19 @@
 
 #include "../headers/Cell.h"
 
-// static attributes
-const sf::Color Cell::wallColor = sf::Color(50, 50, 50);
-const sf::Color Cell::floorColor = sf::Color(189, 189, 189);
-const sf::Color Cell::undefinedColor = sf::Color(189, 189, 189);
-
 // constructors
-Cell::Cell(CellType cellType, float width, float height, sf::Vector2f position) :
-    cellType(cellType), height(height), width(width), position(position) {}
+Cell::Cell(CellType cellType, sf::Vector2f size, sf::Vector2f position) :
+    cellType(cellType), size(size), position(position) {
+}
 
-// copy constructor
 Cell::Cell(const Cell &rhs) {
     cellType = rhs.cellType;
-    height = rhs.height;
-    width = rhs.width;
+    size = rhs.size;
     position = rhs.position;
 }
+
+// destructor
+Cell::~Cell() = default;
 
 // operators
 Cell & Cell::operator = (const Cell &rhs) = default;
@@ -49,9 +46,9 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     cellType = cellType_;
 }
 
-// draw derived from sf::Drawable
+// draw inherited from sf::Drawable
 void Cell::draw(sf::RenderTarget &target, sf::RenderStates) const {
-    sf::RectangleShape rectangle(sf::Vector2f{height, width});
+    sf::RectangleShape rectangle(size);
     rectangle.setPosition(position);
 
     sf::Texture wallTexture;
@@ -62,7 +59,6 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates) const {
 
     switch(cellType) {
         case Cell::Wall: {
-//            rectangle.setFillColor(Cell::wallColor);
             rectangle.setTexture(&wallTexture);
             break;
         }
@@ -71,9 +67,10 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates) const {
             break;
         }
         default: {
-            rectangle.setFillColor(Cell::undefinedColor);
+            rectangle.setFillColor(sf::Color::Black);
             break;
         }
     }
+
     target.draw(rectangle);
 }

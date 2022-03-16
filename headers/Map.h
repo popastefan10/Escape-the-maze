@@ -23,6 +23,10 @@ public:
     // constructors
     Map();
     [[maybe_unused]] explicit Map(const std::string &);   // config file
+    [[maybe_unused]] Map(const Map &);
+
+    // destructor
+    ~Map();
 
     // operators
     Map & operator = (const Map &);
@@ -36,7 +40,7 @@ public:
     // draw derived din sf::Drawable
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const;
 
-    bool isInside(const sf::Vector2i &);
+    [[nodiscard]] bool isInside(const sf::Vector2i &) const;
     bool isFree(const sf::Vector2i &);
 };
 

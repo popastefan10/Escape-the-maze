@@ -21,6 +21,10 @@ class Game {
 public:
     // constructors
     [[maybe_unused]] explicit Game(sf::RenderWindow &, const std::string &);
+    [[maybe_unused]] Game(const Game &);
+
+    // destructor
+    ~Game();
 
     void start();
 };
