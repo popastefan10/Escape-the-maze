@@ -9,11 +9,7 @@ Cell::Cell(CellType cellType, sf::Vector2f size, sf::Vector2f position) :
     cellType(cellType), size(size), position(position) {
 }
 
-Cell::Cell(const Cell &rhs) {
-    cellType = rhs.cellType;
-    size = rhs.size;
-    position = rhs.position;
-}
+Cell::Cell(const Cell &rhs) : cellType(rhs.cellType), size(rhs.size), position(rhs.position) {}
 
 // destructor
 Cell::~Cell() = default;
@@ -40,10 +36,6 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
 // getters / setters
 [[maybe_unused]] Cell::CellType Cell::getCellType() {
     return cellType;
-}
-
-[[maybe_unused]] [[maybe_unused]] void Cell::setCellType(Cell::CellType cellType_) {
-    cellType = cellType_;
 }
 
 // draw inherited from sf::Drawable

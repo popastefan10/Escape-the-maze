@@ -48,13 +48,8 @@ Map::Map() : height{0}, width{0}, cellHeight{0}, cellWidth{0} {}
     parseConfigFile(configFile);
 }
 
-[[maybe_unused]] Map::Map(const Map &rhs) {
-    height = rhs.height;
-    width = rhs.width;
-    cellHeight = rhs.cellHeight;
-    cellWidth = rhs.cellWidth;
-    cells = rhs.cells;
-}
+[[maybe_unused]] Map::Map(const Map &rhs) :
+    height(rhs.height), width(rhs.width), cellHeight(rhs.cellHeight), cellWidth(rhs.cellWidth), cells(rhs.cells) {}
 
 // destructor
 Map::~Map() = default;
@@ -76,10 +71,6 @@ std::ostream & operator << (std::ostream &os, const Map &map) {
 const std::vector<Cell> & Map::operator [] (int line) {
     return cells[line];
 }
-
-// getters / setters
-int Map::getHeight() const { return height; }
-[[maybe_unused]] int Map::getWidth() const { return width; }
 
 // draw inherited din sf::Drawable
 void Map::draw(sf::RenderTarget &target, sf::RenderStates) const {

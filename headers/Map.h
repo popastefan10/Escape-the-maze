@@ -33,10 +33,6 @@ public:
     friend std::ostream & operator << (std::ostream &, const Map &);
     const std::vector<Cell> & operator [] (int);
 
-    // getters / setters
-    [[nodiscard]] int getHeight() const;
-    [[maybe_unused]] [[nodiscard]] int getWidth() const;
-
     // draw derived din sf::Drawable
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const;
 
