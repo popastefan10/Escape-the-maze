@@ -75,8 +75,9 @@ const std::vector<Cell> & Map::operator [] (int line) {
 // draw inherited din sf::Drawable
 void Map::draw(sf::RenderTarget &target, sf::RenderStates) const {
     for(int i = 0; i < height; i++)
-        for(int j = 0; j < width; j++)
+        for(int j = 0; j < width; j++) {
             target.draw(cells[i][j]);
+        }
 }
 
 bool Map::isInside(const sf::Vector2i &position) const {

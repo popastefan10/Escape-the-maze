@@ -22,6 +22,9 @@ private:
     sf::Vector2f size;
     sf::Vector2f position;
 
+    sf::Texture wallTexture;
+    sf::Texture floorTexture;
+
 public:
     // constructors
     explicit Cell(CellType = Cell::Undefined, sf::Vector2f = sf::Vector2f{}, sf::Vector2f = sf::Vector2f{});
@@ -39,6 +42,9 @@ public:
 
     // draw inherited din sf::Drawable
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const;
+
+private:
+    void loadResources();
 };
 
 #endif //OOP_CELL_H

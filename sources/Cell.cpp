@@ -7,9 +7,12 @@
 // constructors
 Cell::Cell(CellType cellType, sf::Vector2f size, sf::Vector2f position) :
     cellType(cellType), size(size), position(position) {
+    loadResources();
 }
 
-Cell::Cell(const Cell &rhs) : cellType(rhs.cellType), size(rhs.size), position(rhs.position) {}
+Cell::Cell(const Cell &rhs) :
+cellType(rhs.cellType), size(rhs.size), position(rhs.position),
+wallTexture(rhs.wallTexture), floorTexture(rhs.floorTexture) {}
 
 // destructor
 Cell::~Cell() = default;
@@ -43,11 +46,11 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates) const {
     sf::RectangleShape rectangle(size);
     rectangle.setPosition(position);
 
-    sf::Texture wallTexture;
-    wallTexture.loadFromFile("resources/bedrock.png");
-
-    sf::Texture floorTexture;
-    floorTexture.loadFromFile("resources/smooth_stone.png");
+//    sf::Texture wallTexture;
+//    wallTexture.loadFromFile("resources/bedrock.png");
+//
+//    sf::Texture floorTexture;
+//    floorTexture.loadFromFile("resources/smooth_stone.png");
 
     switch(cellType) {
         case Cell::Wall: {
@@ -65,4 +68,9 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates) const {
     }
 
     target.draw(rectangle);
+}
+
+void Cell::loadResources() {
+    wallTexture.loadFromFile("resources/bedrock.png");
+    floorTexture.loadFromFile("resources/smooth_stone.png");
 }
