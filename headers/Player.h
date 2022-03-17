@@ -8,17 +8,21 @@
 #include "SFML/Graphics.hpp"
 
 class Player : public sf::Drawable {
+    float width;
+    float height;
     sf::Vector2i position;
     sf::Texture playerTexture;
 
 public:
     // constructors
     Player();
-    explicit Player(const sf::Vector2i &);
+    explicit Player(float, float, const sf::Vector2i &);
 
     // getters / setters
     sf::Vector2i getPosition();
     void setPosition(const sf::Vector2i &);
+
+    void setSize(const sf::Vector2f &);
 
     // draw inherited from sf::Drawable
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const;

@@ -5,13 +5,13 @@
 #include "../headers/Cell.h"
 
 // constructors
-Cell::Cell(CellType cellType, sf::Vector2f size, sf::Vector2f position) :
-    cellType(cellType), size(size), position(position) {
+Cell::Cell(CellType cellType, float width, float height, sf::Vector2f position) :
+cellType(cellType), width(width), height(height), position(position) {
     loadResources();
 }
 
 Cell::Cell(const Cell &rhs) :
-cellType(rhs.cellType), size(rhs.size), position(rhs.position),
+cellType(rhs.cellType), width(rhs.width), height(rhs.height), position(rhs.position),
 wallTexture(rhs.wallTexture), floorTexture(rhs.floorTexture) {}
 
 // destructor
@@ -37,20 +37,14 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
 }
 
 // getters / setters
-[[maybe_unused]] Cell::CellType Cell::getCellType() {
+Cell::CellType Cell::getCellType() {
     return cellType;
 }
 
 // draw inherited from sf::Drawable
 void Cell::draw(sf::RenderTarget &target, sf::RenderStates) const {
-    sf::RectangleShape rectangle(size);
+    sf::RectangleShape rectangle(sf::Vector2f(width, height));
     rectangle.setPosition(position);
-
-//    sf::Texture wallTexture;
-//    wallTexture.loadFromFile("resources/bedrock.png");
-//
-//    sf::Texture floorTexture;
-//    floorTexture.loadFromFile("resources/smooth_stone.png");
 
     switch(cellType) {
         case Cell::Wall: {

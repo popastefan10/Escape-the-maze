@@ -5,11 +5,13 @@
 #include "../headers/Player.h"
 
 // constructors
-Player::Player() : position(sf::Vector2i(0, 0)) {
+Player::Player() :
+width(0), height(0), position(sf::Vector2i(0, 0)) {
     loadTextures();
 }
 
-Player::Player(const sf::Vector2i &position) : position(position) {
+Player::Player(float width, float height, const sf::Vector2i &position) :
+width(width), height(height), position(position) {
     loadTextures();
 }
 
@@ -22,11 +24,16 @@ void Player::setPosition(const sf::Vector2i &newPosition) {
     position = newPosition;
 }
 
+void Player::setSize(const sf::Vector2f &newSize) {
+    width = newSize.x;
+    height = newSize.y;
+}
+
 // draw inherited from sf::Drawable
 void Player::draw(sf::RenderTarget &target, sf::RenderStates) const {
     sf::RectangleShape rectangle;
-    rectangle.setSize(sf::Vector2f(15.0, 15.0));
-    rectangle.setPosition(sf::Vector2f(15.0f * position.x, 15.0f * position.y));
+    rectangle.setSize(sf::Vector2f(width, height));
+    rectangle.setPosition(sf::Vector2f(width * (float)position.x, height * (float)position.y));
     rectangle.setTexture(&playerTexture);
     target.draw(rectangle);
 }

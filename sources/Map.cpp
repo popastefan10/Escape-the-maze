@@ -9,8 +9,8 @@
 void Map::parseConfigFile(const std::string &configFile) {
     std::ifstream fin(configFile);
 
-    fin >> height >> width;
-    fin >> cellHeight >> cellWidth;
+    fin >> width >> height;
+    fin >> cellWidth >> cellHeight;
     fin.get();
 
     std::string crtLine;
@@ -23,13 +23,13 @@ void Map::parseConfigFile(const std::string &configFile) {
         for(int j = 0; j < width; j++) {
             switch (crtLine[j]) {
                 case '#':
-                    cells[i].emplace_back(Cell(Cell::Wall, sf::Vector2f{cellHeight, cellWidth}, cellPosition));
+                    cells[i].emplace_back(Cell(Cell::Wall, cellWidth, cellHeight, cellPosition));
                     break;
                 case ' ':
-                    cells[i].emplace_back(Cell(Cell::Floor, sf::Vector2f{cellHeight, cellWidth}, cellPosition));
+                    cells[i].emplace_back(Cell(Cell::Floor, cellWidth, cellHeight, cellPosition));
                     break;
                 default:
-                    cells[i].emplace_back(Cell(Cell::Undefined, sf::Vector2f{cellHeight, cellWidth}, cellPosition));
+                    cells[i].emplace_back(Cell(Cell::Undefined, cellWidth, cellHeight, cellPosition));
                     break;
             }
 
@@ -42,14 +42,14 @@ void Map::parseConfigFile(const std::string &configFile) {
 }
 
 // constructors
-Map::Map() : height{0}, width{0}, cellHeight{0}, cellWidth{0} {}
+Map::Map() : width{0}, height{0}, cellWidth{0}, cellHeight{0} {}
 
-[[maybe_unused]] Map::Map(const std::string &configFile) : height{0}, width{0}, cellHeight{0}, cellWidth{0} {
+[[maybe_unused]] Map::Map(const std::string &configFile) : width{0}, height{0}, cellWidth{0}, cellHeight{0} {
     parseConfigFile(configFile);
 }
 
 [[maybe_unused]] Map::Map(const Map &rhs) :
-    height(rhs.height), width(rhs.width), cellHeight(rhs.cellHeight), cellWidth(rhs.cellWidth), cells(rhs.cells) {}
+width(rhs.width), height(rhs.height), cellWidth(rhs.cellWidth), cellHeight(rhs.cellHeight), cells(rhs.cells) {}
 
 // destructor
 Map::~Map() = default;
@@ -72,6 +72,11 @@ const std::vector<Cell> & Map::operator [] (int line) {
     return cells[line];
 }
 
+// getters
+sf::Vector2f Map::getCellSize() const {
+    return {cellWidth, cellHeight};
+}
+
 // draw inherited din sf::Drawable
 void Map::draw(sf::RenderTarget &target, sf::RenderStates) const {
     for(int i = 0; i < height; i++)
@@ -84,6 +89,6 @@ bool Map::isInside(const sf::Vector2i &position) const {
     return position.x >= 0 && position.x < width && position.y >= 0 && position.y < height;
 }
 
-bool Map::isFree(const sf::Vector2i &position) {
+bool Map::isEmpty(const sf::Vector2i &position) {
     return cells[position.y][position.x].getCellType() == Cell::Floor;
 }

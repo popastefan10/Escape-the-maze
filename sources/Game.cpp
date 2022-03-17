@@ -6,7 +6,10 @@
 
 // constructors
 [[maybe_unused]] Game::Game(sf::RenderWindow &window, const std::string & configFile) :
-    window(window), map(configFile), player() {}
+    window(window), map(configFile), player() {
+    sf::Vector2f cellSize = map.getCellSize();
+    player.setSize(cellSize);
+}
 
 [[maybe_unused]] Game::Game(const Game &rhs) = default;
 
@@ -67,7 +70,7 @@ void Game::start() {
                         break;
                 }
 
-                if(map.isInside(playerPosition) && map.isFree(playerPosition))
+                if(map.isInside(playerPosition) && map.isEmpty(playerPosition))
                     player.setPosition(playerPosition);
             }
         }

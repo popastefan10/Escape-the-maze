@@ -19,7 +19,8 @@ public:
 
 private:
     CellType cellType;
-    sf::Vector2f size;
+    float width;
+    float height;
     sf::Vector2f position;
 
     sf::Texture wallTexture;
@@ -27,7 +28,7 @@ private:
 
 public:
     // constructors
-    explicit Cell(CellType = Cell::Undefined, sf::Vector2f = sf::Vector2f{}, sf::Vector2f = sf::Vector2f{});
+    explicit Cell(CellType = Cell::Undefined, float height = 0, float width = 0, sf::Vector2f = sf::Vector2f{});
     Cell(const Cell &);
 
     //destructor

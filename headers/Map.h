@@ -10,10 +10,10 @@
 #include "Cell.h"
 
 class Map : public sf::Drawable {
-    int height;
     int width;
-    float cellHeight;
+    int height;
     float cellWidth;
+    float cellHeight;
     std::vector< std::vector<Cell> > cells;
 
 private:
@@ -33,11 +33,14 @@ public:
     friend std::ostream & operator << (std::ostream &, const Map &);
     const std::vector<Cell> & operator [] (int);
 
+    // getters
+    sf::Vector2f getCellSize() const;
+
     // draw derived din sf::Drawable
     virtual void draw(sf::RenderTarget &, sf::RenderStates) const;
 
     [[nodiscard]] bool isInside(const sf::Vector2i &) const;
-    bool isFree(const sf::Vector2i &);
+    bool isEmpty(const sf::Vector2i &);
 };
 
 
