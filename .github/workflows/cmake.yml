@@ -179,7 +179,7 @@ jobs:
         if: runner.os == 'Windows' && matrix.cxx == 'g++'
         with:
           path: gcc
-          key: ${{ runner.os }}-gcc-11.2-ucrt-r5
+          key: ${{ runner.os }}-gcc-10.3-ucrt-r5
 
       - name: Download toolchain (MinGW)
         uses: suisei-cn/actions-download-file@v1
