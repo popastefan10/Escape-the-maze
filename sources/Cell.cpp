@@ -18,7 +18,17 @@ wallTexture(rhs.wallTexture), floorTexture(rhs.floorTexture) {}
 Cell::~Cell() = default;
 
 // operators
-Cell & Cell::operator = (const Cell &rhs) = default;
+Cell & Cell::operator = (const Cell &rhs) {
+    cellType = rhs.cellType;
+    width = rhs.width;
+    height = rhs.height;
+    position = rhs.position;
+
+    wallTexture = rhs.wallTexture;
+    floorTexture = rhs.wallTexture;
+
+    return *this;
+};
 
 std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     switch(cell.cellType) {
