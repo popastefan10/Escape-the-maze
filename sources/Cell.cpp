@@ -28,7 +28,7 @@ Cell & Cell::operator = (const Cell &rhs) {
     floorTexture = rhs.wallTexture;
 
     return *this;
-};
+}
 
 std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     switch(cell.cellType) {
