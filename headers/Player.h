@@ -16,7 +16,8 @@ class Player : public sf::Drawable {
 public:
     // constructors
     Player();
-    explicit Player(float, float, const sf::Vector2i &);
+
+    [[maybe_unused]] explicit Player(float, float, const sf::Vector2i &);
 
     // getters / setters
     sf::Vector2i getPosition();
@@ -25,7 +26,7 @@ public:
     void setSize(const sf::Vector2f &);
 
     // draw inherited from sf::Drawable
-    virtual void draw(sf::RenderTarget &, sf::RenderStates) const;
+    void draw(sf::RenderTarget &, sf::RenderStates) const override;
 
 private:
     void loadTextures();

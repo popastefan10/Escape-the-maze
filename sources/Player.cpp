@@ -10,7 +10,7 @@ width(0), height(0), position(sf::Vector2i(0, 0)) {
     loadTextures();
 }
 
-Player::Player(float width, float height, const sf::Vector2i &position) :
+[[maybe_unused]] Player::Player(float width, float height, const sf::Vector2i &position) :
 width(width), height(height), position(position) {
     loadTextures();
 }

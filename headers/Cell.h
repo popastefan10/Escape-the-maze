@@ -32,7 +32,7 @@ public:
     Cell(const Cell &);
 
     //destructor
-    ~Cell();
+    ~Cell() override;
 
     // operators
     Cell & operator = (const Cell &);
@@ -42,7 +42,7 @@ public:
     CellType getCellType();
 
     // draw inherited din sf::Drawable
-    virtual void draw(sf::RenderTarget &, sf::RenderStates) const;
+    void draw(sf::RenderTarget &, sf::RenderStates) const override;
 
 private:
     void loadResources();

@@ -5,7 +5,7 @@
 #include "../headers/Game.h"
 
 // constructors
-[[maybe_unused]] Game::Game(sf::RenderWindow &window, const std::string & configFile) :
+Game::Game(sf::RenderWindow &window, const std::string & configFile) :
     window(window), map(configFile), player() {
     sf::Vector2f cellSize = map.getCellSize();
     player.setSize(cellSize);
