@@ -30,6 +30,7 @@ public:
     // constructors
     explicit Cell(CellType = Cell::Undefined, float height = 0, float width = 0, sf::Vector2f = sf::Vector2f{});
     Cell(const Cell &);
+    virtual Cell *clone();
 
     //destructor
     ~Cell() override;
@@ -43,6 +44,8 @@ public:
 
     // draw inherited din sf::Drawable
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
+
+    virtual bool canWalkOn();
 
 private:
     void loadResources();

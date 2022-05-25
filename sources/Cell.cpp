@@ -14,6 +14,10 @@ Cell::Cell(const Cell &rhs) :
 cellType(rhs.cellType), width(rhs.width), height(rhs.height), position(rhs.position),
 wallTexture(rhs.wallTexture), floorTexture(rhs.floorTexture) {}
 
+Cell *Cell::clone() {
+    return new Cell(*this);
+}
+
 // destructor
 Cell::~Cell() = default;
 
@@ -72,6 +76,10 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates) const {
     }
 
     target.draw(rectangle);
+}
+
+bool Cell::canWalkOn() {
+    return true;
 }
 
 void Cell::loadResources() {
