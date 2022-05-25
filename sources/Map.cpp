@@ -55,7 +55,7 @@ Map::Map() : width{0}, height{0}, cellWidth{0}, cellHeight{0} {}
 }
 
 [[maybe_unused]] Map::Map(const Map &rhs) :
-width(rhs.width), height(rhs.height), cellWidth(rhs.cellWidth), cellHeight(rhs.cellHeight), cells(rhs.cells) {}
+    width(rhs.width), height(rhs.height), cellWidth(rhs.cellWidth), cellHeight(rhs.cellHeight), cells(rhs.cells) {}
 
 // destructor
 Map::~Map() = default;
@@ -74,8 +74,12 @@ std::ostream & operator << (std::ostream &os, const Map &map) {
     return os;
 }
 
-const std::vector<Cell> & Map::operator [] (int line) {
-    return cells[line];
+//const std::vector<Cell> & Map::operator [] (int line) {
+//    return cells[line];
+//}
+
+const std::vector< std::shared_ptr< Cell > > & Map::operator [] (int line) {
+    return cells_[line];
 }
 
 // getters
@@ -87,7 +91,7 @@ sf::Vector2f Map::getCellSize() const {
 void Map::draw(sf::RenderTarget &target, sf::RenderStates) const {
     for(int i = 0; i < height; i++)
         for(int j = 0; j < width; j++) {
-            target.draw(cells[i][j]);
+            target.draw(*cells_[i][j]);
         }
 }
 

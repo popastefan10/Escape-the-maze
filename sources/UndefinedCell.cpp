@@ -21,6 +21,14 @@ std::ostream &operator<<(std::ostream &os, const UndefinedCell &undefinedCell) {
     return os;
 }
 
+// draw inherited from sf::Drawable
+void UndefinedCell::draw(sf::RenderTarget &target, sf::RenderStates) const {
+    sf::RectangleShape rectangle(sf::Vector2f(width, height));
+    rectangle.setPosition(position);
+    rectangle.setFillColor(sf::Color::Black);
+    target.draw(rectangle);
+}
+
 bool UndefinedCell::canWalkOn() {
     return false;
 }

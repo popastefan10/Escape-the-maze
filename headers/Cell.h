@@ -17,7 +17,7 @@ public:
         Floor,
     };
 
-private:
+protected:
     CellType cellType;
     float width;
     float height;

@@ -15,6 +15,9 @@ public:
     void afisare(std::ostream &) const override;
     friend std::ostream & operator << (std::ostream &, const WallCell &);
 
+    // draw inherited din sf::Drawable
+    void draw(sf::RenderTarget &, sf::RenderStates) const override;
+
     bool canWalkOn() override;
 
 };

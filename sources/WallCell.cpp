@@ -22,6 +22,14 @@ std::ostream &operator<<(std::ostream &os, const WallCell &wallCell) {
     return os;
 }
 
+// draw inherited from sf::Drawable
+void WallCell::draw(sf::RenderTarget &target, sf::RenderStates) const {
+    sf::RectangleShape rectangle(sf::Vector2f(width, height));
+    rectangle.setPosition(position);
+    rectangle.setTexture(&wallTexture);
+    target.draw(rectangle);
+}
+
 bool WallCell::canWalkOn() {
     return true;
 }
