@@ -10,9 +10,14 @@
 class UndefinedCell : public Cell {
 
 public:
+    // constructors
     explicit UndefinedCell(float height = 0, float width = 0, sf::Vector2f = sf::Vector2f{});
     UndefinedCell(const UndefinedCell &) = default;
     UndefinedCell *clone() override;
+
+    // operators
+    void afisare(std::ostream &) const override;
+    friend std::ostream & operator << (std::ostream &, const UndefinedCell &);
 
     bool canWalkOn() override;
 

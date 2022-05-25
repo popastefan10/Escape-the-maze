@@ -7,7 +7,11 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 #include "Cell.h"
+#include "WallCell.h"
+#include "FloorCell.h"
+#include "UndefinedCell.h"
 
 class Map : public sf::Drawable {
     int width;
@@ -15,6 +19,7 @@ class Map : public sf::Drawable {
     float cellWidth;
     float cellHeight;
     std::vector< std::vector<Cell> > cells;
+    std::vector< std::vector< std::shared_ptr<Cell> > > cells_;
 
 private:
     void parseConfigFile(const std::string &);

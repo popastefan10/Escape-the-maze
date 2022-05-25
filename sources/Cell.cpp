@@ -34,8 +34,8 @@ Cell & Cell::operator = (const Cell &rhs) {
     return *this;
 }
 
-std::ostream &operator<<(std::ostream &os, const Cell &cell) {
-    switch(cell.cellType) {
+void Cell::afisare(std::ostream &os) const {
+    switch(cellType) {
         case Cell::Wall:
             os << '#';
             break;
@@ -46,7 +46,10 @@ std::ostream &operator<<(std::ostream &os, const Cell &cell) {
             os << '?';
             break;
     }
+}
 
+std::ostream &operator<<(std::ostream &os, const Cell &cell) {
+    cell.afisare(os);
     return os;
 }
 

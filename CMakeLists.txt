@@ -114,6 +114,6 @@ install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 install(DIRECTORY resources DESTINATION bin)
 # install(FILES some_file1.txt some_file2.md DESTINATION bin)
 
-if(ESCAPE_MAZE_OPTS_DLLS STREQUAL "1")
+if(ESCAPE_MAZE_OPTS_DLLS STREQUAL "0")
     install(FILES "C:/Program Files/JetBrains/CLion 2021.3.4/bin/mingw/bin/libstdc++-6.dll" DESTINATION bin)
 endif()

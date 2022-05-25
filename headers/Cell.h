@@ -37,6 +37,7 @@ public:
 
     // operators
     Cell & operator = (const Cell &);
+    virtual void afisare(std::ostream &) const;
     friend std::ostream & operator << (std::ostream &, const Cell &);
 
     // getters / setters

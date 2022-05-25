@@ -20,19 +20,25 @@ void Map::parseConfigFile(const std::string &configFile) {
         std::getline(fin, crtLine);
 
         cells.emplace_back(std::vector<Cell>());
+        cells_.emplace_back(std::vector< std::shared_ptr<Cell> >());
+        std::shared_ptr<Cell> cell_ptr;
         for(int j = 0; j < width; j++) {
             switch (crtLine[j]) {
                 case '#':
                     cells[i].emplace_back(Cell(Cell::Wall, cellWidth, cellHeight, cellPosition));
+                    cell_ptr = std::make_shared<WallCell>(cellHeight, cellWidth, cellPosition);
                     break;
                 case ' ':
                     cells[i].emplace_back(Cell(Cell::Floor, cellWidth, cellHeight, cellPosition));
+                    cell_ptr = std::make_shared<FloorCell>(cellHeight, cellWidth, cellPosition);
                     break;
                 default:
                     cells[i].emplace_back(Cell(Cell::Undefined, cellWidth, cellHeight, cellPosition));
+                    cell_ptr = std::make_shared<UndefinedCell>(cellHeight, cellWidth, cellPosition);
                     break;
             }
 
+            cells_[i].emplace_back(cell_ptr);
             cellPosition.x += cellWidth;
         }
 
@@ -61,7 +67,7 @@ std::ostream & operator << (std::ostream &os, const Map &map) {
     os << "width: " << map.width << " height: " << map.height << "\n";
     for(int i = 0; i < map.width; i++) {
         for (int j = 0; j < map.height; j++)
-            os << map.cells[i][j];
+            os << *map.cells_[i][j];
         os << '\n';
     }
 
