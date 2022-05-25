@@ -18,8 +18,7 @@ class Map : public sf::Drawable {
     int height;
     float cellWidth;
     float cellHeight;
-    std::vector< std::vector<Cell> > cells;
-    std::vector< std::vector< std::shared_ptr<Cell> > > cells_;
+    std::vector< std::vector< std::shared_ptr<Cell> > > cells;
 
 private:
     void parseConfigFile(const std::string &);

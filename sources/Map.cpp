@@ -19,26 +19,22 @@ void Map::parseConfigFile(const std::string &configFile) {
     for(int i = 0; i < height; i++) {
         std::getline(fin, crtLine);
 
-        cells.emplace_back(std::vector<Cell>());
-        cells_.emplace_back(std::vector< std::shared_ptr<Cell> >());
+        cells.emplace_back(std::vector< std::shared_ptr<Cell> >());
         std::shared_ptr<Cell> cell_ptr;
         for(int j = 0; j < width; j++) {
             switch (crtLine[j]) {
                 case '#':
-                    cells[i].emplace_back(Cell(Cell::Wall, cellWidth, cellHeight, cellPosition));
                     cell_ptr = std::make_shared<WallCell>(cellHeight, cellWidth, cellPosition);
                     break;
                 case ' ':
-                    cells[i].emplace_back(Cell(Cell::Floor, cellWidth, cellHeight, cellPosition));
                     cell_ptr = std::make_shared<FloorCell>(cellHeight, cellWidth, cellPosition);
                     break;
                 default:
-                    cells[i].emplace_back(Cell(Cell::Undefined, cellWidth, cellHeight, cellPosition));
                     cell_ptr = std::make_shared<UndefinedCell>(cellHeight, cellWidth, cellPosition);
                     break;
             }
 
-            cells_[i].emplace_back(cell_ptr);
+            cells[i].emplace_back(cell_ptr);
             cellPosition.x += cellWidth;
         }
 
@@ -55,7 +51,7 @@ Map::Map() : width{0}, height{0}, cellWidth{0}, cellHeight{0} {}
 }
 
 [[maybe_unused]] Map::Map(const Map &rhs) :
-    width(rhs.width), height(rhs.height), cellWidth(rhs.cellWidth), cellHeight(rhs.cellHeight), cells(rhs.cells) {}
+        width(rhs.width), height(rhs.height), cellWidth(rhs.cellWidth), cellHeight(rhs.cellHeight), cells(rhs.cells) {}
 
 // destructor
 Map::~Map() = default;
@@ -67,19 +63,15 @@ std::ostream & operator << (std::ostream &os, const Map &map) {
     os << "width: " << map.width << " height: " << map.height << "\n";
     for(int i = 0; i < map.width; i++) {
         for (int j = 0; j < map.height; j++)
-            os << *map.cells_[i][j];
+            os << *map.cells[i][j];
         os << '\n';
     }
 
     return os;
 }
 
-//const std::vector<Cell> & Map::operator [] (int line) {
-//    return cells[line];
-//}
-
 const std::vector< std::shared_ptr< Cell > > & Map::operator [] (int line) {
-    return cells_[line];
+    return cells[line];
 }
 
 // getters
@@ -91,7 +83,7 @@ sf::Vector2f Map::getCellSize() const {
 void Map::draw(sf::RenderTarget &target, sf::RenderStates) const {
     for(int i = 0; i < height; i++)
         for(int j = 0; j < width; j++) {
-            target.draw(*cells_[i][j]);
+            target.draw(*cells[i][j]);
         }
 }
 
@@ -100,5 +92,7 @@ bool Map::isInside(const sf::Vector2i &position) const {
 }
 
 bool Map::isEmpty(const sf::Vector2i &position) {
-    return cells[position.y][position.x].getCellType() == Cell::Floor;
+    if(std::dynamic_pointer_cast<FloorCell>(cells[position.y][position.x]))
+        return true;
+    return false;
 }

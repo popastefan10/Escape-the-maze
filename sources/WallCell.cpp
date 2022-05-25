@@ -6,7 +6,7 @@
 
 // constructors
 WallCell::WallCell(float height, float witdh, sf::Vector2f position) :
-    Cell(CellType::Wall, height, witdh, position) {}
+    Cell(height, witdh, position) {}
 
 WallCell *WallCell::clone() {
     return new WallCell(*this);

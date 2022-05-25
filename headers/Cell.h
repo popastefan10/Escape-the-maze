@@ -10,15 +10,7 @@
 
 class Cell : public sf::Drawable {
 
-public:
-    enum CellType {
-        Undefined,
-        Wall,
-        Floor,
-    };
-
 protected:
-    CellType cellType;
     float width;
     float height;
     sf::Vector2f position;
@@ -28,23 +20,17 @@ protected:
 
 public:
     // constructors
-    explicit Cell(CellType = Cell::Undefined, float height = 0, float width = 0, sf::Vector2f = sf::Vector2f{});
+    explicit Cell(float height = 0, float width = 0, sf::Vector2f = sf::Vector2f{});
     Cell(const Cell &);
-    virtual Cell *clone();
+    virtual Cell *clone() = 0;
 
     //destructor
     ~Cell() override;
 
     // operators
     Cell & operator = (const Cell &);
-    virtual void afisare(std::ostream &) const;
+    virtual void afisare(std::ostream &) const = 0;
     friend std::ostream & operator << (std::ostream &, const Cell &);
-
-    // getters / setters
-    CellType getCellType();
-
-    // draw inherited din sf::Drawable
-    void draw(sf::RenderTarget &, sf::RenderStates) const override;
 
     virtual bool canWalkOn();
 
