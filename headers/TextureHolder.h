@@ -14,17 +14,11 @@
 #include "SFML/Graphics.hpp"
 
 template <typename Identifier>
-class [[maybe_unused]] TextureHolder {
+class TextureHolder {
     std::map<Identifier, std::unique_ptr<sf::Texture>> mTextureMap;
 
 public:
-    [[maybe_unused]] void load(Identifier id, const std::string &filename);
-//    void load(Identifier id, const std::string &filename) {
-//        std::unique_ptr<sf::Texture> texture(new sf::Texture());
-//        texture->loadFromFile(filename);
-//
-//        mTextureMap.insert(std::make_pair(id, std::move(texture)));
-//    }
+    void load(Identifier id, const std::string &filename);
 
     sf::Texture& get(Identifier id);
     [[nodiscard]] const sf::Texture& get(Identifier id) const;

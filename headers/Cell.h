@@ -22,15 +22,12 @@ public:
     static TextureHolder<CellTextures::ID> cellTextureHolder;
 
 public:
-    [[maybe_unused]] static void loadTextures();
+    static void loadTextures();
 
 protected:
     float width;
     float height;
     sf::Vector2f position;
-
-    sf::Texture wallTexture;
-    sf::Texture floorTexture;
 
 public:
     // constructors
@@ -47,9 +44,6 @@ public:
     friend std::ostream & operator << (std::ostream &, const Cell &);
 
     virtual bool canWalkOn() = 0;
-
-private:
-    void loadResources();
 };
 
 #endif //OOP_CELL_H
