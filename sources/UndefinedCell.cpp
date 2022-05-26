@@ -7,8 +7,8 @@
 UndefinedCell::UndefinedCell(float height, float witdh, sf::Vector2f position) :
     Cell(height, witdh, position) {}
 
-UndefinedCell *UndefinedCell::clone() {
-    return new UndefinedCell(*this);
+std::shared_ptr<Cell> UndefinedCell::clone() {
+    return std::make_shared<UndefinedCell>(*this);
 }
 
 // operators

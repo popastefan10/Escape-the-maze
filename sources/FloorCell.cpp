@@ -7,8 +7,8 @@
 FloorCell::FloorCell(float height, float witdh, sf::Vector2f position) :
         Cell(height, witdh, position) {}
 
-FloorCell *FloorCell::clone() {
-    return new FloorCell(*this);
+std::shared_ptr<Cell> FloorCell::clone() {
+    return std::make_shared<FloorCell>(*this);
 }
 
 // operators

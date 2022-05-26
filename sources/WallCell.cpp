@@ -8,8 +8,8 @@
 WallCell::WallCell(float height, float witdh, sf::Vector2f position) :
     Cell(height, witdh, position) {}
 
-WallCell *WallCell::clone() {
-    return new WallCell(*this);
+std::shared_ptr<Cell> WallCell::clone() {
+    return std::make_shared<WallCell>(*this);
 }
 
 // operators

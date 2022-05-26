@@ -51,7 +51,11 @@ Map::Map() : width{0}, height{0}, cellWidth{0}, cellHeight{0} {}
 }
 
 [[maybe_unused]] Map::Map(const Map &rhs) :
-        width(rhs.width), height(rhs.height), cellWidth(rhs.cellWidth), cellHeight(rhs.cellHeight), cells(rhs.cells) {}
+        width(rhs.width), height(rhs.height), cellWidth(rhs.cellWidth), cellHeight(rhs.cellHeight) {
+    for(int i = 0; i < height; i++)
+        for(int j = 0; j < width; j++)
+            cells[i][j] = rhs.cells[i][j]->clone();
+}
 
 // destructor
 Map::~Map() = default;

@@ -33,7 +33,7 @@ public:
     // constructors
     explicit Cell(float height = 0, float width = 0, sf::Vector2f = sf::Vector2f{});
     Cell(const Cell &);
-    [[maybe_unused]] virtual Cell *clone() = 0;
+    [[maybe_unused]] virtual std::shared_ptr<Cell> clone() = 0;
 
     //destructor
     ~Cell() override;
