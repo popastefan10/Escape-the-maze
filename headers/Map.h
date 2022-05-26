@@ -45,7 +45,7 @@ public:
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
 
     [[nodiscard]] bool isInside(const sf::Vector2i &) const;
-    bool isEmpty(const sf::Vector2i &);
+    bool canWalkOn(const sf::Vector2i &);
 };
 
 

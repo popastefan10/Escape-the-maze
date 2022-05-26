@@ -70,7 +70,7 @@ void Game::start() {
                         break;
                 }
 
-                if(map.isInside(playerPosition) && map.isEmpty(playerPosition))
+                if(map.isInside(playerPosition) && map.canWalkOn(playerPosition))
                     player.setPosition(playerPosition);
             }
         }

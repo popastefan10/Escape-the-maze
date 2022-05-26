@@ -32,7 +32,7 @@ public:
     virtual void afisare(std::ostream &) const = 0;
     friend std::ostream & operator << (std::ostream &, const Cell &);
 
-    virtual bool canWalkOn();
+    virtual bool canWalkOn() = 0;
 
 private:
     void loadResources();

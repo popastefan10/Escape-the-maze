@@ -14,14 +14,14 @@
 #include "SFML/Graphics.hpp"
 
 namespace Textures {
-    enum ID {
+    enum [[maybe_unused]] ID {
         Bedrock,
         SmoothStone,
         TotemOfUndying
     };
 }
 
-class TextureHolder {
+class [[maybe_unused]] TextureHolder {
     std::map<Textures::ID, std::unique_ptr<sf::Texture>> mTextureMap;
 
 public:

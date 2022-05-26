@@ -31,5 +31,5 @@ void WallCell::draw(sf::RenderTarget &target, sf::RenderStates) const {
 }
 
 bool WallCell::canWalkOn() {
-    return true;
+    return false;
 }

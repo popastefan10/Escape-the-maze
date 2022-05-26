@@ -5,7 +5,7 @@
 #include "../headers/Cell.h"
 
 // constructors
-Cell::Cell(float width, float height, sf::Vector2f position) :
+Cell::Cell(float height, float width, sf::Vector2f position) :
     width(width), height(height), position(position) {
     loadResources();
 }
@@ -32,10 +32,6 @@ Cell & Cell::operator = (const Cell &rhs) {
 std::ostream &operator<<(std::ostream &os, const Cell &cell) {
     cell.afisare(os);
     return os;
-}
-
-bool Cell::canWalkOn() {
-    return true;
 }
 
 void Cell::loadResources() {
