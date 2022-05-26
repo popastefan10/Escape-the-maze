@@ -33,9 +33,9 @@ public:
     ~Map() override;
 
     // operators
+    friend void swap(Map &, Map &);
     Map & operator = (const Map &);
     friend std::ostream & operator << (std::ostream &, const Map &);
-//    const std::vector<Cell> & operator [] (int);
     const std::vector< std::shared_ptr< Cell > > & operator [] (int);
 
     // getters

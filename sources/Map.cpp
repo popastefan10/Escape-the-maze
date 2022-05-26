@@ -61,7 +61,21 @@ Map::Map() : width{0}, height{0}, cellWidth{0}, cellHeight{0} {}
 Map::~Map() = default;
 
 // operators
-Map & Map::operator = (const Map &rhs) = default;
+void swap(Map &lhs, Map &rhs) {
+    using std::swap;
+
+    swap(lhs.height, rhs.height);
+    swap(lhs.width, rhs.width);
+    swap(lhs.cellHeight, rhs.cellHeight);
+    swap(lhs.cellWidth, rhs.cellWidth);
+    swap(lhs.cells, rhs.cells);
+}
+
+Map & Map::operator = (const Map &rhs) {
+    Map copy(rhs);
+    swap(*this, copy);
+    return *this;
+}
 
 std::ostream & operator << (std::ostream &os, const Map &map) {
     os << "width: " << map.width << " height: " << map.height << "\n";
