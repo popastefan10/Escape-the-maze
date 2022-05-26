@@ -9,7 +9,7 @@ public:
     // constructors
     explicit WallCell(float height = 0, float width = 0, sf::Vector2f = sf::Vector2f{});
     WallCell(const WallCell &) = default;
-    WallCell *clone() override;
+    [[maybe_unused]] WallCell *clone() override;
 
     // operators
     void afisare(std::ostream &) const override;
