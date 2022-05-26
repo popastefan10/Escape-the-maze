@@ -13,22 +13,15 @@
 #include <memory>
 #include "SFML/Graphics.hpp"
 
-namespace Textures {
-    enum [[maybe_unused]] ID {
-        Bedrock,
-        SmoothStone,
-        TotemOfUndying
-    };
-}
-
+template <typename Identifier>
 class [[maybe_unused]] TextureHolder {
-    std::map<Textures::ID, std::unique_ptr<sf::Texture>> mTextureMap;
+    std::map<Identifier, std::unique_ptr<sf::Texture>> mTextureMap;
 
 public:
-    [[maybe_unused]] void load(Textures::ID id, const std::string &filename);
+    [[maybe_unused]] void load(Identifier id, const std::string &filename);
 
-    sf::Texture& get(Textures::ID id);
-    [[nodiscard]] const sf::Texture& get(Textures::ID id) const;
+    sf::Texture& get(Identifier id);
+    [[nodiscard]] const sf::Texture& get(Identifier id) const;
 };
 
 #endif //OOP_TEXTUREHOLDER_H
