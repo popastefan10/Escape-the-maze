@@ -4,6 +4,14 @@
 
 #include "../headers/Cell.h"
 
+// static members
+TextureHolder<CellTextures::ID> Cell::cellTextureHolder;
+
+[[maybe_unused]] void Cell::loadTextures() {
+    cellTextureHolder.load(CellTextures::Bedrock, "resources/bedrock.png");
+    cellTextureHolder.load(CellTextures::SmoothStone, "resources/smooth_stone.png");
+}
+
 // constructors
 Cell::Cell(float height, float width, sf::Vector2f position) :
     width(width), height(height), position(position) {

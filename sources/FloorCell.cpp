@@ -25,7 +25,8 @@ std::ostream &operator<<(std::ostream &os, const FloorCell &floorCell) {
 void FloorCell::draw(sf::RenderTarget &target, sf::RenderStates) const {
     sf::RectangleShape rectangle(sf::Vector2f(width, height));
     rectangle.setPosition(position);
-    rectangle.setTexture(&floorTexture);
+    sf::Texture &floorCellTexture = cellTextureHolder.get(CellTextures::SmoothStone);
+    rectangle.setTexture(&floorCellTexture);
     target.draw(rectangle);
 }
 

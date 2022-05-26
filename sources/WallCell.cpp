@@ -26,7 +26,8 @@ std::ostream &operator<<(std::ostream &os, const WallCell &wallCell) {
 void WallCell::draw(sf::RenderTarget &target, sf::RenderStates) const {
     sf::RectangleShape rectangle(sf::Vector2f(width, height));
     rectangle.setPosition(position);
-    rectangle.setTexture(&wallTexture);
+    sf::Texture &wallCellTexture = cellTextureHolder.get(CellTextures::Bedrock);
+    rectangle.setTexture(&wallCellTexture);
     target.draw(rectangle);
 }
 

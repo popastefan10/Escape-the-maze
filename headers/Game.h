@@ -27,6 +27,8 @@ public:
     ~Game();
 
     void start();
+
+    static void loadTextures();
 };
 
 

@@ -86,3 +86,7 @@ void Game::start() {
         window.display();
     }
 }
+
+void Game::loadTextures() {
+    Cell::loadTextures();
+}

@@ -7,8 +7,22 @@
 
 #include <iostream>
 #include "SFML/Graphics.hpp"
+#include "TextureHolder.h"
+
+namespace CellTextures {
+    enum ID {
+        Bedrock,
+        SmoothStone,
+    };
+}
 
 class Cell : public sf::Drawable {
+
+public:
+    static TextureHolder<CellTextures::ID> cellTextureHolder;
+
+public:
+    [[maybe_unused]] static void loadTextures();
 
 protected:
     float width;

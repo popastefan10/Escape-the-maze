@@ -19,9 +19,35 @@ class [[maybe_unused]] TextureHolder {
 
 public:
     [[maybe_unused]] void load(Identifier id, const std::string &filename);
+//    void load(Identifier id, const std::string &filename) {
+//        std::unique_ptr<sf::Texture> texture(new sf::Texture());
+//        texture->loadFromFile(filename);
+//
+//        mTextureMap.insert(std::make_pair(id, std::move(texture)));
+//    }
 
     sf::Texture& get(Identifier id);
     [[nodiscard]] const sf::Texture& get(Identifier id) const;
 };
+
+template <typename Identifier>
+void TextureHolder<Identifier>::load(Identifier id, const std::string &filename) {
+    std::unique_ptr<sf::Texture> texture(new sf::Texture());
+    texture->loadFromFile(filename);
+
+    mTextureMap.insert(std::make_pair(id, std::move(texture)));
+}
+
+template <typename Identifier>
+sf::Texture &TextureHolder<Identifier>::get(Identifier id) {
+    auto found = mTextureMap.find(id);
+    return *found->second;
+}
+
+template <typename Identifier>
+const sf::Texture &TextureHolder<Identifier>::get(Identifier id) const {
+    auto found = mTextureMap.find(id);
+    return *found->second;
+}
 
 #endif //OOP_TEXTUREHOLDER_H

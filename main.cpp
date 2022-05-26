@@ -1,7 +1,9 @@
 #include "headers/Game.h"
-//#include "headers/TextureHolder.h"
+#include "headers/TextureHolder.h"
 
 int main() {
+
+    Game::loadTextures();
 
     sf::RenderWindow window(sf::VideoMode(465, 465), "Escape the Maze");
     Game game(window, "resources/mapConfig.txt");
