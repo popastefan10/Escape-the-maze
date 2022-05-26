@@ -93,7 +93,4 @@ bool Map::isInside(const sf::Vector2i &position) const {
 
 bool Map::canWalkOn(const sf::Vector2i &position) {
     return cells[position.y][position.x]->canWalkOn();
-    if(std::dynamic_pointer_cast<FloorCell>(cells[position.y][position.x]))
-        return true;
-    return false;
 }
