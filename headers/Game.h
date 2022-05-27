@@ -7,6 +7,7 @@
 
 #include "Map.h"
 #include "Player.h"
+#include "Util.h"
 #include <string>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -17,6 +18,9 @@ class Game {
     sf::RenderWindow &window;
     Map map;
     Player player;
+
+    static const int textSize = 24;
+    sf::Text gameWonText;
 
 public:
     // constructors

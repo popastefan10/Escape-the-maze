@@ -17,8 +17,6 @@ Game::Game(sf::RenderWindow &window, const std::string & configFile) :
 Game::~Game() = default;
 
 void Game::start() {
-    std::cout << map;
-
     window.setVerticalSyncEnabled(true); // call it once, after creating the window
 
     window.setFramerateLimit(60); // call it once, after creating the window
@@ -33,7 +31,10 @@ void Game::start() {
     // change the title of the window
     window.setTitle("SFML window");
 
-    player.setPosition(sf::Vector2i(1, 0));
+    const sf::Vector2i startPosition(1, 0);
+    const sf::Vector2i endPosition(29, 30);
+    bool finishedGame = false;
+    player.setPosition(startPosition);
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -70,8 +71,12 @@ void Game::start() {
                         break;
                 }
 
-                if(map.isInside(playerPosition) && map.canWalkOn(playerPosition))
+                if(!finishedGame && map.isInside(playerPosition) && map.canWalkOn(playerPosition)) {
                     player.setPosition(playerPosition);
+                    std::cout << "X = " << playerPosition.x << ", Y = " << playerPosition.y << std::endl;
+                }
+                if(playerPosition == endPosition)
+                    finishedGame = true;
             }
         }
 
@@ -81,6 +86,22 @@ void Game::start() {
         // draw everything here...
         window.draw(map);
         window.draw(player);
+        if(finishedGame) {
+            Util::addShadow(window);
+
+            // Draw the game winning text
+            sf::Font font;
+            font.loadFromFile("resources/fonts/Minecraft.ttf");
+            sf::Text text;
+            text.setFont(font);
+            text.setString("You won!");
+            text.setCharacterSize(24);
+            text.setFillColor(sf::Color::Green);
+
+            text.setPosition(Util::centerRectInsideWindow(window, text.getGlobalBounds()));
+
+            window.draw(text);
+        }
 
         // end the current frame
         window.display();
