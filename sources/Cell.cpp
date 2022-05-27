@@ -8,8 +8,21 @@
 TextureHolder<CellTextures::ID> Cell::cellTextureHolder;
 
 void Cell::loadTextures() {
-    cellTextureHolder.load(CellTextures::Bedrock, "resources/bedrock.png");
-    cellTextureHolder.load(CellTextures::SmoothStone, "resources/smooth_stone.png");
+    const std::string texturesBasePath = "resources/";
+    const std::vector< std::pair< CellTextures::ID, std::string > > textures = {
+            std::make_pair(CellTextures::Bedrock, "bedrock.png"),
+            std::make_pair(CellTextures::SmoothStone, "smooth_stone.png")
+    };
+
+    // This way if a texture is not loaded the other textures won't be affected
+    for(const std::pair< CellTextures::ID, std::string > &texture : textures) {
+        try {
+            cellTextureHolder.load(texture.first, texturesBasePath + texture.second);
+        }
+        catch (FailedTextureLoad &e) {
+            std::cout << e.what() << std::endl;
+        }
+    }
 }
 
 // constructors

@@ -12,6 +12,7 @@
 #include <map>
 #include <memory>
 #include "SFML/Graphics.hpp"
+#include "Exceptions.h"
 
 template <typename Identifier>
 class TextureHolder {
@@ -27,7 +28,12 @@ public:
 template <typename Identifier>
 void TextureHolder<Identifier>::load(Identifier id, const std::string &filename) {
     std::unique_ptr<sf::Texture> texture(new sf::Texture());
-    texture->loadFromFile(filename);
+    if(!texture->loadFromFile(filename)) {
+        if(filename.empty())
+            throw FailedTextureLoad();
+        else
+            throw FailedTextureLoad(filename);
+    }
 
     mTextureMap.insert(std::make_pair(id, std::move(texture)));
 }
