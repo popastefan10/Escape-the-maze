@@ -6,6 +6,7 @@
 
 std::string Util::resourcesBasePath = "resources/";
 std::string Util::texturesBasePath = "textures/";
+std::string Util::configsBasePath = "configs/";
 
 void Util::addShadow(sf::RenderWindow &window) {
     sf::Vector2u windowSize = window.getSize();
@@ -44,4 +45,8 @@ sf::Vector2f Util::centerRectInsideWindow(sf::RenderWindow &window, sf::FloatRec
 
 std::string Util::getTexturesBasePath() {
     return getResourcesBasePath() + texturesBasePath;
+}
+
+std::string Util::getConfigBasePath() {
+    return getResourcesBasePath() + configsBasePath;
 }

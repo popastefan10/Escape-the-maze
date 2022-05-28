@@ -13,10 +13,7 @@ Game::Game(sf::RenderWindow &window) :
     // Textures will load only once, since Game class is a singleton
     Game::loadTextures();
 
-    loadLevel("level3");
-
-    sf::Vector2f cellSize = map.getCellSize();
-    player.setSize(cellSize);
+    loadLevel("level1");
 }
 
 Game &Game::getGame(sf::RenderWindow &window) {
@@ -38,10 +35,16 @@ void Game::start() {
     // change the title of the window
     window.setTitle("SFML window");
 
-    const sf::Vector2i startPosition = (sf::Vector2i)level.getStartPosition();
-    const sf::Vector2i endPosition = (sf::Vector2i)level.getEndPosition();
-    bool finishedGame = false;
-    player.setPosition(startPosition);
+    std::vector< std::string > levelIDs = {
+        "level1",
+        "level2",
+        "level3",
+    };
+    int currentLevelIdx = 0;
+    loadLevel(levelIDs[currentLevelIdx]);
+    bool finishedLevel = false;
+    bool gameWon = false;
+    sf::Vector2i endPosition = (sf::Vector2i)level.getEndPosition();
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -78,10 +81,10 @@ void Game::start() {
                         break;
                 }
 
-                if(!finishedGame && map.isInside(playerPosition) && map.canWalkOn(playerPosition))
+                if(!finishedLevel && map.isInside(playerPosition) && map.canWalkOn(playerPosition))
                     player.setPosition(playerPosition);
                 if(playerPosition == endPosition)
-                    finishedGame = true;
+                    finishedLevel = true;
             }
         }
 
@@ -91,7 +94,19 @@ void Game::start() {
         // draw everything here...
         window.draw(map);
         window.draw(player);
-        if(finishedGame) {
+        if(finishedLevel) {
+            currentLevelIdx++;
+            finishedLevel = false;
+
+            if(currentLevelIdx == (int)levelIDs.size()) {
+                gameWon = true;
+            }
+            else {
+                loadLevel(levelIDs[currentLevelIdx]);
+                endPosition = (sf::Vector2i)level.getEndPosition();
+            }
+        }
+        if(gameWon) {
             Util::addShadow(window);
 
             // Draw the game winning text
@@ -118,9 +133,15 @@ void Game::loadLevel(const std::string &levelID) {
         level = PredefinedLevels::getLevel(levelID);
         map = Map(level.getMapConfigFilename());
 
+        sf::Vector2f cellSize = map.getCellSize();
+        player.setSize(cellSize);
+
         // Adding special cells to the map
         map.setStartPosition(level.getStartPosition());
         map.setEndPosition(level.getEndPosition());
+
+        // Moving player to the start
+        player.setPosition(sf::Vector2i(level.getStartPosition()));
 
         // Resizing the window
         sf::Vector2f mapSize = map.getMapSize();

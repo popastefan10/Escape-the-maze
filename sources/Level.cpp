@@ -31,7 +31,7 @@ void PredefinedLevels::generateLevels() {
     levelsRegistry.insert(std::make_pair(
         "level1",
         Level(
-            "resources/mapConfigs/level1.txt",
+            Util::getConfigBasePath() + "/level1.txt",
             {1, 0},
             {9, 10}
         )
@@ -40,7 +40,7 @@ void PredefinedLevels::generateLevels() {
     levelsRegistry.insert(std::make_pair(
             "level2",
             Level(
-                    "resources/mapConfigs/level2.txt",
+                    Util::getConfigBasePath() + "/level2.txt",
                     {1, 0},
                     {19, 20}
             )
@@ -49,7 +49,7 @@ void PredefinedLevels::generateLevels() {
     levelsRegistry.insert(std::make_pair(
             "level3",
             Level(
-                    "resources/mapConfigs/level3.txt",
+                    Util::getConfigBasePath() + "/level3.txt",
                     {1, 0},
                     {29, 30}
             )

@@ -12,6 +12,7 @@ class Util {
 private:
     static std::string resourcesBasePath;
     static std::string texturesBasePath;
+    static std::string configsBasePath;
 
 public:
     static void addShadow(sf::RenderWindow &);
@@ -19,6 +20,7 @@ public:
 
     static std::string getResourcesBasePath();
     static std::string getTexturesBasePath();
+    static std::string getConfigBasePath();
 };
 
 
