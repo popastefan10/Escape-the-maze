@@ -16,6 +16,7 @@ private:
 
 public:
     static void addShadow(sf::RenderWindow &);
+    static void drawMessage(sf::RenderWindow &, const std::string &);
     static sf::Vector2f centerRectInsideWindow(sf::RenderWindow &, sf::FloatRect);
 
     static std::string getResourcesBasePath();

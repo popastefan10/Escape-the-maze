@@ -108,19 +108,8 @@ void Game::start() {
         }
         if(gameWon) {
             Util::addShadow(window);
-
             // Draw the game winning text
-            sf::Font font;
-            font.loadFromFile("resources/fonts/Minecraft.ttf");
-            sf::Text text;
-            text.setFont(font);
-            text.setString("You won!");
-            text.setCharacterSize(30);
-            text.setFillColor(sf::Color::Green);
-
-            text.setPosition(Util::centerRectInsideWindow(window, text.getGlobalBounds()));
-
-            window.draw(text);
+            Util::drawMessage(window, "You won!");
         }
 
         // end the current frame
