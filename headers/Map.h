@@ -40,6 +40,7 @@ public:
 
     // getters
     [[nodiscard]] sf::Vector2f getCellSize() const;
+    [[nodiscard]] sf::Vector2f getMapSize() const;
 
     // draw derived din sf::Drawable
     void draw(sf::RenderTarget &, sf::RenderStates) const override;

@@ -13,7 +13,7 @@ Game::Game(sf::RenderWindow &window) :
     // Textures will load only once, since Game class is a singleton
     Game::loadTextures();
 
-    loadLevel("level1");
+    loadLevel("level3");
 
     sf::Vector2f cellSize = map.getCellSize();
     player.setSize(cellSize);
@@ -34,10 +34,6 @@ void Game::start() {
 
     // change the position of the window (relatively to the desktop)
     window.setPosition(sf::Vector2i(0, 0));
-
-    const unsigned int MODE_WIDTH = 900;
-    const unsigned int MODE_HEIGHT = 900;
-    window.setSize(sf::Vector2u(MODE_WIDTH, MODE_HEIGHT));
 
     // change the title of the window
     window.setTitle("SFML window");
@@ -104,7 +100,7 @@ void Game::start() {
             sf::Text text;
             text.setFont(font);
             text.setString("You won!");
-            text.setCharacterSize(24);
+            text.setCharacterSize(30);
             text.setFillColor(sf::Color::Green);
 
             text.setPosition(Util::centerRectInsideWindow(window, text.getGlobalBounds()));
@@ -121,6 +117,15 @@ void Game::loadLevel(const std::string &levelID) {
     try {
         level = PredefinedLevels::getLevel(levelID);
         map = Map(level.getMapConfigFilename());
+
+        // Resizing the window
+        sf::Vector2f mapSize = map.getMapSize();
+        sf::Vector2i mapSizeInPixels = window.mapCoordsToPixel(mapSize);
+        window.setSize((sf::Vector2u)mapSizeInPixels);
+
+        // Setting a new view
+        sf::View view(sf::FloatRect(0.0, 0.0, mapSize.y, mapSize.x));
+        window.setView(view);
     }
     catch(BadID &e) {
         std::cout << e.what() << std::endl;

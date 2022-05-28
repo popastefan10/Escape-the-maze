@@ -100,6 +100,10 @@ sf::Vector2f Map::getCellSize() const {
     return {cellWidth, cellHeight};
 }
 
+sf::Vector2f Map::getMapSize() const {
+    return {cellHeight * (float)height, cellWidth * (float)width};
+}
+
 // draw inherited din sf::Drawable
 void Map::draw(sf::RenderTarget &target, sf::RenderStates) const {
     for(int i = 0; i < height; i++)

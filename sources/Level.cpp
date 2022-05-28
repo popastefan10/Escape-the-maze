@@ -33,7 +33,7 @@ void PredefinedLevels::generateLevels() {
         Level(
             "resources/mapConfigs/level1.txt",
             {1, 0},
-            {29, 30}
+            {9, 10}
         )
     ));
 
@@ -42,7 +42,7 @@ void PredefinedLevels::generateLevels() {
             Level(
                     "resources/mapConfigs/level2.txt",
                     {1, 0},
-                    {9, 10}
+                    {19, 20}
             )
     ));
 
@@ -51,7 +51,7 @@ void PredefinedLevels::generateLevels() {
             Level(
                     "resources/mapConfigs/level3.txt",
                     {1, 0},
-                    {19, 20}
+                    {29, 30}
             )
     ));
 }
