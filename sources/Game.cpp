@@ -13,7 +13,7 @@ Game::Game(sf::RenderWindow &window) :
     // Textures will load only once, since Game class is a singleton
     Game::loadTextures();
 
-    loadLevel("level1");
+    loadLevel("level12");
 
     sf::Vector2f cellSize = map.getCellSize();
     player.setSize(cellSize);
@@ -118,8 +118,13 @@ void Game::start() {
 }
 
 void Game::loadLevel(const std::string &levelID) {
-    level = PredefinedLevels::getLevel(levelID);
-    map = Map(level.getMapConfigFilename());
+    try {
+        level = PredefinedLevels::getLevel(levelID);
+        map = Map(level.getMapConfigFilename());
+    }
+    catch(BadID &e) {
+        std::cout << e.what() << std::endl;
+    }
 }
 
 void Game::loadTextures() {

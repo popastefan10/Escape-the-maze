@@ -57,5 +57,14 @@ void PredefinedLevels::generateLevels() {
 }
 
 Level PredefinedLevels::getLevel(const std::string& levelID) {
+    auto levelIterator = levelsRegistry.find(levelID);
+
+    if(levelIterator == levelsRegistry.end()) {
+        if(levelID.empty())
+            throw BadID();
+        else
+            throw BadID(levelID);
+    }
+
     return levelsRegistry[levelID];
 }

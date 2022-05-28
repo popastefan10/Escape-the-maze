@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include "SFML/Graphics.hpp"
+#include "Exceptions.h"
 
 class Level {
 

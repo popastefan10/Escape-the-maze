@@ -44,14 +44,10 @@ void Map::parseConfigFile(const std::string &configFile) {
 }
 
 // constructors
-Map::Map() : width{0}, height{0}, cellWidth{0}, cellHeight{0} {
-    std::cout << "Ctr Map fara parametri\n";
-}
+Map::Map() : width{0}, height{0}, cellWidth{0}, cellHeight{0} {}
 
 Map::Map(const std::string &configFile) : width{0}, height{0}, cellWidth{0}, cellHeight{0} {
-    std::cout << "Construiesc harta cu 1 param: " << configFile << std::endl;
     parseConfigFile(configFile);
-    std::cout << "Dupa ce am parsat harta\n";
 }
 
 [[maybe_unused]] Map::Map(const Map &rhs) :
