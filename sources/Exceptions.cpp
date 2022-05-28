@@ -18,3 +18,10 @@ FailedTextureLoad::FailedTextureLoad() :
 
 FailedTextureLoad::FailedTextureLoad(const std::string& textureFileName) :
     CustomException(std::string("Failed to load texture: \"") + textureFileName + std::string("\".")) {}
+
+// BadID
+BadID::BadID() :
+    CustomException("There isn't any resource with this identifier.") {}
+
+BadID::BadID(const std::string &badID) :
+        CustomException("There isn't any resource with this identifier: " + badID + ".") {}

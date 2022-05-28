@@ -26,4 +26,11 @@ public:
     explicit FailedTextureLoad(const std::string&);
 };
 
+class BadID : public CustomException {
+
+public:
+    BadID();
+    explicit BadID(const std::string &);
+};
+
 #endif //OOP_EXCEPTIONS_H
