@@ -11,7 +11,8 @@ void Cell::loadTextures() {
     const std::string texturesBasePath = Util::getTexturesBasePath();
     const std::vector< std::pair< CellTextures::ID, std::string > > textures = {
             std::make_pair(CellTextures::Bedrock, "bedrock.png"),
-            std::make_pair(CellTextures::SmoothStone, "smooth_stone.png")
+            std::make_pair(CellTextures::SmoothStone, "smooth_stone.png"),
+            std::make_pair(CellTextures::RedstoneBlock, "redstone_block.png"),
     };
 
     // This way if a texture is not loaded the other textures won't be affected

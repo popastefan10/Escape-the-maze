@@ -118,6 +118,8 @@ void Game::loadLevel(const std::string &levelID) {
         level = PredefinedLevels::getLevel(levelID);
         map = Map(level.getMapConfigFilename());
 
+        map.setStartPosition(level.getStartPosition());
+
         // Resizing the window
         sf::Vector2f mapSize = map.getMapSize();
         sf::Vector2i mapSizeInPixels = window.mapCoordsToPixel(mapSize);

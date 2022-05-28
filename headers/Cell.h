@@ -14,6 +14,7 @@ namespace CellTextures {
     enum ID {
         Bedrock,
         SmoothStone,
+        RedstoneBlock
     };
 }
 

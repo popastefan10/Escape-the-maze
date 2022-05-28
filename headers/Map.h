@@ -12,6 +12,7 @@
 #include "WallCell.h"
 #include "FloorCell.h"
 #include "UndefinedCell.h"
+#include "StartCell.h"
 
 class Map : public sf::Drawable {
     int width;
@@ -38,9 +39,12 @@ public:
     friend std::ostream & operator << (std::ostream &, const Map &);
     const std::vector< std::shared_ptr< Cell > > & operator [] (int);
 
-    // getters
+    // getters / setters
     [[nodiscard]] sf::Vector2f getCellSize() const;
     [[nodiscard]] sf::Vector2f getMapSize() const;
+
+    sf::Vector2f getCellCoords(int, int) const;
+    void setStartPosition(sf::Vector2u);
 
     // draw derived din sf::Drawable
     void draw(sf::RenderTarget &, sf::RenderStates) const override;

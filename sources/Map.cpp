@@ -95,13 +95,26 @@ const std::vector< std::shared_ptr< Cell > > & Map::operator [] (int line) {
     return cells[line];
 }
 
-// getters
+// getters / setters
 sf::Vector2f Map::getCellSize() const {
     return {cellWidth, cellHeight};
 }
 
 sf::Vector2f Map::getMapSize() const {
     return {cellHeight * (float)height, cellWidth * (float)width};
+}
+
+sf::Vector2f Map::getCellCoords(int row, int col) const {
+    return {(float)col * cellWidth, (float)row * cellHeight};
+}
+
+void Map::setStartPosition(sf::Vector2u startPosition) {
+    unsigned int i = startPosition.y, j = startPosition.x;
+    std::cout << "i = " << i << ", j = " << j << std::endl;
+    if((int)i > width || (int)j > height)
+        return;
+    cells[i][j] = std::make_shared<StartCell>(cellHeight, cellWidth, getCellCoords((int)i, (int)j));
+//    cells[i][j] = std::make_shared<StartCell>(cellHeight, cellWidth, sf::Vector2f{0, 15});
 }
 
 // draw inherited din sf::Drawable

@@ -11,7 +11,7 @@ class FloorCell : public Cell {
 
 public:
     // constructors
-    explicit FloorCell(float height = 0, float width = 0, sf::Vector2f = sf::Vector2f{});
+    FloorCell(float height = 0, float width = 0, sf::Vector2f = sf::Vector2f{});
     FloorCell(const FloorCell &) = default;
     [[maybe_unused]] std::shared_ptr<Cell> clone() override;
 
