@@ -8,7 +8,7 @@
 TextureHolder<std::string> Player::playerTextureHolder;
 
 void Player::loadTextures() {
-    const std::string texturesBasePath = "resources/";
+    const std::string texturesBasePath = Util::getTexturesBasePath();
     const std::vector< std::pair< std::string, std::string > > textures = {
         std::make_pair("totem_of_undying", "totem_of_undying.png"),
     };

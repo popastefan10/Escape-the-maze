@@ -9,9 +9,16 @@
 
 class Util {
 
+private:
+    static std::string resourcesBasePath;
+    static std::string texturesBasePath;
+
 public:
     static void addShadow(sf::RenderWindow &);
     static sf::Vector2f centerRectInsideWindow(sf::RenderWindow &, sf::FloatRect);
+
+    static std::string getResourcesBasePath();
+    static std::string getTexturesBasePath();
 };
 
 

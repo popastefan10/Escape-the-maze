@@ -8,7 +8,7 @@
 TextureHolder<CellTextures::ID> Cell::cellTextureHolder;
 
 void Cell::loadTextures() {
-    const std::string texturesBasePath = "resources/";
+    const std::string texturesBasePath = Util::getTexturesBasePath();
     const std::vector< std::pair< CellTextures::ID, std::string > > textures = {
             std::make_pair(CellTextures::Bedrock, "bedrock.png"),
             std::make_pair(CellTextures::SmoothStone, "smooth_stone.png")

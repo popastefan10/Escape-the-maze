@@ -4,6 +4,9 @@
 
 #include "../headers/Util.h"
 
+std::string Util::resourcesBasePath = "resources/";
+std::string Util::texturesBasePath = "textures/";
+
 void Util::addShadow(sf::RenderWindow &window) {
     sf::Vector2u windowSize = window.getSize();
 
@@ -33,4 +36,12 @@ sf::Vector2f Util::centerRectInsideWindow(sf::RenderWindow &window, sf::FloatRec
     float y = (bigHeight - smallHeight) / 2;
 
     return {x, y};
+}
+
+[[maybe_unused]] std::string Util::getResourcesBasePath() {
+    return resourcesBasePath;
+}
+
+std::string Util::getTexturesBasePath() {
+    return getResourcesBasePath() + texturesBasePath;
 }

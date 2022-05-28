@@ -8,6 +8,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "TextureHolder.h"
+#include "Util.h"
 
 namespace CellTextures {
     enum ID {
