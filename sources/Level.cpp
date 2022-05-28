@@ -22,3 +22,9 @@ sf::Vector2u Level::getStartPosition() {
 sf::Vector2u Level::getEndPosition() {
     return endPosition;
 }
+
+// PredefinedLevels //////////////////////////////
+
+Level PredefinedLevels::getLevel1() {
+    return {"mapConfig.txt", {1, 0}, {29, 30}};
+}

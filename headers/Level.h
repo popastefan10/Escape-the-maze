@@ -24,5 +24,11 @@ public:
     sf::Vector2u getEndPosition();
 };
 
+// Factory
+class PredefinedLevels {
+
+public:
+    static Level getLevel1();
+};
 
 #endif //OOP_LEVEL_H
