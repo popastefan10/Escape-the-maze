@@ -35,6 +35,7 @@ public:
 
     void start();
 
+    void loadLevel(const std::string &);
     static void loadTextures();
 };
 

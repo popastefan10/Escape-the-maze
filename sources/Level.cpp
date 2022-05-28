@@ -59,7 +59,3 @@ void PredefinedLevels::generateLevels() {
 Level PredefinedLevels::getLevel(const std::string& levelID) {
     return levelsRegistry[levelID];
 }
-
-Level PredefinedLevels::getLevel1() {
-    return {"resources/mapConfig.txt", {1, 0}, {29, 30}};
-}

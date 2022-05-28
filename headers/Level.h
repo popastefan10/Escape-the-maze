@@ -34,7 +34,6 @@ private:
 public:
     static void generateLevels();
     static Level getLevel(const std::string&);
-    static Level getLevel1();
 };
 
 #endif //OOP_LEVEL_H

@@ -13,11 +13,7 @@ Game::Game(sf::RenderWindow &window) :
     // Textures will load only once, since Game class is a singleton
     Game::loadTextures();
 
-    // Load the level
-    level = PredefinedLevels::getLevel("level1");
-    std::cout << "Harta: " << level.getMapConfigFilename() << std::endl;
-    map = Map(level.getMapConfigFilename());
-    std::cout << "Am incarcat mapa'\n";
+    loadLevel("level1");
 
     sf::Vector2f cellSize = map.getCellSize();
     player.setSize(cellSize);
@@ -119,6 +115,11 @@ void Game::start() {
         // end the current frame
         window.display();
     }
+}
+
+void Game::loadLevel(const std::string &levelID) {
+    level = PredefinedLevels::getLevel(levelID);
+    map = Map(level.getMapConfigFilename());
 }
 
 void Game::loadTextures() {
