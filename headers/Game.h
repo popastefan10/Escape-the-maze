@@ -21,6 +21,7 @@ class Game {
     Level level;
     Map map;
     Player player;
+    sf::Clock gameClock;
 
 private:
     explicit Game(sf::RenderWindow &);
@@ -32,6 +33,9 @@ public:
 
     // destructor
     ~Game();
+
+    // getters / setters
+    sf::Time getTimeElapsed();
 
     void start();
 

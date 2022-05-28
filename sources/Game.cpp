@@ -6,7 +6,7 @@
 
 // constructors
 Game::Game(sf::RenderWindow &window) :
-    window(window), map(), player() {
+    window(window), map(), player(), gameClock() {
 
     // Static functions initialization
     PredefinedLevels::generateLevels();
@@ -19,6 +19,10 @@ Game::Game(sf::RenderWindow &window) :
 Game &Game::getGame(sf::RenderWindow &window) {
     static Game game(window);
     return game;
+}
+
+sf::Time Game::getTimeElapsed() {
+    return gameClock.getElapsedTime();
 }
 
 // destructor
@@ -42,9 +46,14 @@ void Game::start() {
     };
     int currentLevelIdx = 0;
     loadLevel(levelIDs[currentLevelIdx]);
-    bool finishedLevel = false;
-    bool gameWon = false;
     sf::Vector2i endPosition = (sf::Vector2i)level.getEndPosition();
+
+    bool finishedLevel = false;
+    bool startedNewLevel = true;
+    bool gameWon = false;
+
+    sf::Time timeElapsedToBeatLevel;
+    sf::Time timeToWin = sf::seconds(0.0);
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -81,7 +90,7 @@ void Game::start() {
                         break;
                 }
 
-                if(!finishedLevel && map.isInside(playerPosition) && map.canWalkOn(playerPosition))
+                if(!finishedLevel && startedNewLevel && map.isInside(playerPosition) && map.canWalkOn(playerPosition))
                     player.setPosition(playerPosition);
                 if(playerPosition == endPosition)
                     finishedLevel = true;
@@ -94,22 +103,46 @@ void Game::start() {
         // draw everything here...
         window.draw(map);
         window.draw(player);
-        if(finishedLevel) {
-            currentLevelIdx++;
-            finishedLevel = false;
+        if(finishedLevel) { // Finished the current level
+            // Now display some message for a couple of seconds and move on to the next level
+            sf::Time timeToBeatLevel = gameClock.getElapsedTime() - timeElapsedToBeatLevel;
+            timeToWin += timeToBeatLevel;
+            std::cout << "Finished level " << currentLevelIdx + 1 << " in " <<
+                timeToBeatLevel.asSeconds() << " seconds.\n";
 
-            if(currentLevelIdx == (int)levelIDs.size()) {
-                gameWon = true;
+            currentLevelIdx++;
+            if(currentLevelIdx == (int)levelIDs.size())
+                std::cout << "Finished the game in " << timeToWin.asSeconds() << " seconds.\n";
+
+            finishedLevel = false;
+            startedNewLevel = false;
+            timeElapsedToBeatLevel = getTimeElapsed();
+        }
+        if(!startedNewLevel) { // Finished a level but didn't start the next one
+            sf::Time timeElapsed = getTimeElapsed();
+            sf::Time timeElapsedSinceLastLevel = timeElapsed - timeElapsedToBeatLevel;
+            // Check if the message was displayed for enough time
+            if(timeElapsedSinceLastLevel.asSeconds() > 3) {
+                // If yes, we go to the next level
+                startedNewLevel = true;
+
+                if(currentLevelIdx == (int)levelIDs.size()) {
+                    gameWon = true;
+                }
+                else {
+                    loadLevel(levelIDs[currentLevelIdx]);
+                    endPosition = (sf::Vector2i)level.getEndPosition();
+                }
             }
-            else {
-                loadLevel(levelIDs[currentLevelIdx]);
-                endPosition = (sf::Vector2i)level.getEndPosition();
-            }
+
+            Util::addShadow(window);
+            // Draw the game winning text
+            Util::drawMessage(window, "You beat this level!");
         }
         if(gameWon) {
             Util::addShadow(window);
             // Draw the game winning text
-            Util::drawMessage(window, "You won!");
+            Util::drawMessage(window, "You won the game!");
         }
 
         // end the current frame
