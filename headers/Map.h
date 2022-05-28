@@ -12,7 +12,7 @@
 #include "WallCell.h"
 #include "FloorCell.h"
 #include "UndefinedCell.h"
-#include "StartCell.h"
+#include "SpecialCells.h"
 
 class Map : public sf::Drawable {
     int width;
@@ -45,6 +45,7 @@ public:
 
     sf::Vector2f getCellCoords(int, int) const;
     void setStartPosition(sf::Vector2u);
+    void setEndPosition(sf::Vector2u);
 
     // draw derived din sf::Drawable
     void draw(sf::RenderTarget &, sf::RenderStates) const override;

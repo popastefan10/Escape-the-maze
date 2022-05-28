@@ -13,6 +13,7 @@ void Cell::loadTextures() {
             std::make_pair(CellTextures::Bedrock, "bedrock.png"),
             std::make_pair(CellTextures::SmoothStone, "smooth_stone.png"),
             std::make_pair(CellTextures::RedstoneBlock, "redstone_block.png"),
+            std::make_pair(CellTextures::EmeraldBlock, "emerald_block.png"),
     };
 
     // This way if a texture is not loaded the other textures won't be affected

@@ -118,7 +118,9 @@ void Game::loadLevel(const std::string &levelID) {
         level = PredefinedLevels::getLevel(levelID);
         map = Map(level.getMapConfigFilename());
 
+        // Adding special cells to the map
         map.setStartPosition(level.getStartPosition());
+        map.setEndPosition(level.getEndPosition());
 
         // Resizing the window
         sf::Vector2f mapSize = map.getMapSize();
