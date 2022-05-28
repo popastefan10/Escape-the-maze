@@ -5,8 +5,8 @@
 #include "../headers/Game.h"
 
 // constructors
-Game::Game(sf::RenderWindow &window, const std::string & configFile) :
-    window(window), map(configFile), player() {
+Game::Game(sf::RenderWindow &window) :
+    window(window), level(PredefinedLevels::getLevel1()), map(level.getMapConfigFilename()), player() {
     // Textures will load only once, since Game class is a singleton
     Game::loadTextures();
 
@@ -14,8 +14,8 @@ Game::Game(sf::RenderWindow &window, const std::string & configFile) :
     player.setSize(cellSize);
 }
 
-Game &Game::getGame(sf::RenderWindow &window, const std::string &configFile) {
-    static Game game(window, configFile);
+Game &Game::getGame(sf::RenderWindow &window) {
+    static Game game(window);
     return game;
 }
 
@@ -37,8 +37,8 @@ void Game::start() {
     // change the title of the window
     window.setTitle("SFML window");
 
-    const sf::Vector2i startPosition(1, 0);
-    const sf::Vector2i endPosition(29, 30);
+    const sf::Vector2i startPosition = (sf::Vector2i)level.getStartPosition();
+    const sf::Vector2i endPosition = (sf::Vector2i)level.getEndPosition();
     bool finishedGame = false;
     player.setPosition(startPosition);
 

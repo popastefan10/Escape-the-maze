@@ -4,7 +4,7 @@
 int main() {
 
     sf::RenderWindow window(sf::VideoMode(465, 465), "Escape the Maze");
-    Game &game = Game::getGame(window, "resources/mapConfig.txt");
+    Game &game = Game::getGame(window);
     game.start();
 
 //    TextureHolder textures;
