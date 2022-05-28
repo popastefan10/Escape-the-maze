@@ -41,8 +41,9 @@ void Game::start() {
 
     std::vector< std::string > levelIDs = {
         "level1",
-        "level2",
-        "level3",
+        "level1",
+//        "level2",
+//        "level3",
     };
     int currentLevelIdx = 0;
     loadLevel(levelIDs[currentLevelIdx]);
@@ -90,10 +91,13 @@ void Game::start() {
                         break;
                 }
 
-                if(!finishedLevel && map.isInside(playerPosition) && map.canWalkOn(playerPosition))
-                    player.setPosition(playerPosition);
-                if(playerPosition == endPosition)
-                    finishedLevel = true;
+                if (!gameWon && !loadingNextLevel) {
+                    // Update the player's position
+                    if (map.isInside(playerPosition) && map.canWalkOn(playerPosition))
+                        player.setPosition(playerPosition);
+                    if (playerPosition == endPosition)
+                        finishedLevel = true;
+                }
             }
         }
 
@@ -108,16 +112,20 @@ void Game::start() {
             if(!loadingNextLevel) { // Haven't started loading the next level yet
                 // Now display some message for a couple of seconds and move on to the next level
                 sf::Time timeToBeatLevel = gameClock.getElapsedTime() - timeElapsedToBeatLevel;
+                timeElapsedToBeatLevel = getTimeElapsed();
                 timeToWin += timeToBeatLevel;
                 std::cout << "Finished level " << currentLevelIdx + 1 << " in " <<
                           timeToBeatLevel.asSeconds() << " seconds.\n";
 
                 currentLevelIdx++;
-                if(currentLevelIdx == (int)levelIDs.size())
+                if(currentLevelIdx == (int)levelIDs.size()) {
                     std::cout << "Finished the game in " << timeToWin.asSeconds() << " seconds.\n";
-
-                timeElapsedToBeatLevel = getTimeElapsed();
-                loadingNextLevel = true; // Start to load the next level
+                    finishedLevel = false;
+                    loadingNextLevel = false;
+                    gameWon = true;
+                }
+                else
+                    loadingNextLevel = true; // Start to load the next level
             }
             else { // Still loading the next level
                 sf::Time timeElapsed = getTimeElapsed();
@@ -131,6 +139,8 @@ void Game::start() {
 
                     if(currentLevelIdx == (int)levelIDs.size()) {
                         gameWon = true;
+                        loadingNextLevel = false;
+                        finishedLevel = false;
                     }
                     else {
                         loadLevel(levelIDs[currentLevelIdx]);
