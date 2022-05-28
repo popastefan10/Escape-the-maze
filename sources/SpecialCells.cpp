@@ -11,7 +11,7 @@ StartCell::StartCell(float height, float witdh, sf::Vector2f position) :
 void StartCell::draw(sf::RenderTarget &target, sf::RenderStates) const {
     sf::RectangleShape rectangle(sf::Vector2f(width, height));
     rectangle.setPosition(position);
-    sf::Texture &floorCellTexture = cellTextureHolder.get(CellTextures::RedstoneBlock);
+    sf::Texture &floorCellTexture = cellTextureHolder.get(CellTextures::RedWool);
     rectangle.setTexture(&floorCellTexture);
     target.draw(rectangle);
 }
@@ -23,7 +23,7 @@ EndCell::EndCell(float height, float witdh, sf::Vector2f position) :
 void EndCell::draw(sf::RenderTarget &target, sf::RenderStates) const {
     sf::RectangleShape rectangle(sf::Vector2f(width, height));
     rectangle.setPosition(position);
-    sf::Texture &floorCellTexture = cellTextureHolder.get(CellTextures::EmeraldBlock);
+    sf::Texture &floorCellTexture = cellTextureHolder.get(CellTextures::LimeWool);
     rectangle.setTexture(&floorCellTexture);
     target.draw(rectangle);
 }
