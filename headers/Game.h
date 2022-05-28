@@ -19,9 +19,6 @@ class Game {
     Map map;
     Player player;
 
-    static const int textSize = 24;
-    sf::Text gameWonText;
-
 public:
     // constructors
     [[maybe_unused]] explicit Game(sf::RenderWindow &, const std::string &);

@@ -71,10 +71,8 @@ void Game::start() {
                         break;
                 }
 
-                if(!finishedGame && map.isInside(playerPosition) && map.canWalkOn(playerPosition)) {
+                if(!finishedGame && map.isInside(playerPosition) && map.canWalkOn(playerPosition))
                     player.setPosition(playerPosition);
-                    std::cout << "X = " << playerPosition.x << ", Y = " << playerPosition.y << std::endl;
-                }
                 if(playerPosition == endPosition)
                     finishedGame = true;
             }
@@ -110,4 +108,5 @@ void Game::start() {
 
 void Game::loadTextures() {
     Cell::loadTextures();
+    Player::loadTextures();
 }

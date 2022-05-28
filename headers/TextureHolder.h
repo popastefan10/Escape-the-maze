@@ -28,6 +28,7 @@ public:
 template <typename Identifier>
 void TextureHolder<Identifier>::load(Identifier id, const std::string &filename) {
     std::unique_ptr<sf::Texture> texture(new sf::Texture());
+    std::cout << "Loading " << filename << std::endl;
     if(!texture->loadFromFile(filename)) {
         if(filename.empty())
             throw FailedTextureLoad();

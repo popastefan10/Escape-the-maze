@@ -5,13 +5,22 @@
 #ifndef OOP_PLAYER_H
 #define OOP_PLAYER_H
 
+#include <iostream>
 #include "SFML/Graphics.hpp"
+#include "TextureHolder.h"
 
 class Player : public sf::Drawable {
+
+private:
+    static TextureHolder<std::string> playerTextureHolder;
+
+public:
+    static void loadTextures();
+
+private:
     float width;
     float height;
     sf::Vector2i position;
-    sf::Texture playerTexture;
 
 public:
     // constructors
@@ -27,9 +36,6 @@ public:
 
     // draw inherited from sf::Drawable
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
-
-private:
-    void loadTextures();
 };
 
 
