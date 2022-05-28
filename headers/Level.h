@@ -5,6 +5,7 @@
 #ifndef OOP_LEVEL_H
 #define OOP_LEVEL_H
 
+#include <iostream>
 #include <string>
 #include "SFML/Graphics.hpp"
 
@@ -27,7 +28,12 @@ public:
 // Factory
 class PredefinedLevels {
 
+private:
+    static std::map<std::string, Level> levelsRegistry;
+
 public:
+    static void generateLevels();
+    static Level getLevel(const std::string&);
     static Level getLevel1();
 };
 

@@ -25,6 +25,41 @@ sf::Vector2u Level::getEndPosition() {
 
 // PredefinedLevels //////////////////////////////
 
+std::map<std::string, Level> PredefinedLevels::levelsRegistry;
+
+void PredefinedLevels::generateLevels() {
+    levelsRegistry.insert(std::make_pair(
+        "level1",
+        Level(
+            "resources/mapConfigs/level1.txt",
+            {1, 0},
+            {29, 30}
+        )
+    ));
+
+    levelsRegistry.insert(std::make_pair(
+            "level2",
+            Level(
+                    "resources/mapConfigs/level2.txt",
+                    {1, 0},
+                    {9, 10}
+            )
+    ));
+
+    levelsRegistry.insert(std::make_pair(
+            "level3",
+            Level(
+                    "resources/mapConfigs/level3.txt",
+                    {1, 0},
+                    {19, 20}
+            )
+    ));
+}
+
+Level PredefinedLevels::getLevel(const std::string& levelID) {
+    return levelsRegistry[levelID];
+}
+
 Level PredefinedLevels::getLevel1() {
     return {"resources/mapConfig.txt", {1, 0}, {29, 30}};
 }

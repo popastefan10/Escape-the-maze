@@ -44,17 +44,24 @@ void Map::parseConfigFile(const std::string &configFile) {
 }
 
 // constructors
-Map::Map() : width{0}, height{0}, cellWidth{0}, cellHeight{0} {}
+Map::Map() : width{0}, height{0}, cellWidth{0}, cellHeight{0} {
+    std::cout << "Ctr Map fara parametri\n";
+}
 
-[[maybe_unused]] Map::Map(const std::string &configFile) : width{0}, height{0}, cellWidth{0}, cellHeight{0} {
+Map::Map(const std::string &configFile) : width{0}, height{0}, cellWidth{0}, cellHeight{0} {
+    std::cout << "Construiesc harta cu 1 param: " << configFile << std::endl;
     parseConfigFile(configFile);
+    std::cout << "Dupa ce am parsat harta\n";
 }
 
 [[maybe_unused]] Map::Map(const Map &rhs) :
-        width(rhs.width), height(rhs.height), cellWidth(rhs.cellWidth), cellHeight(rhs.cellHeight) {
-    for(int i = 0; i < height; i++)
-        for(int j = 0; j < width; j++)
-            cells[i][j] = rhs.cells[i][j]->clone();
+    width(rhs.width), height(rhs.height), cellWidth(rhs.cellWidth), cellHeight(rhs.cellHeight) {
+    cells.clear();
+    for(int i = 0; i < height; i++) {
+        cells.emplace_back();
+        for (int j = 0; j < width; j++)
+            cells[i].emplace_back(rhs.cells[i][j]->clone());
+    }
 }
 
 // destructor

@@ -6,9 +6,18 @@
 
 // constructors
 Game::Game(sf::RenderWindow &window) :
-    window(window), level(PredefinedLevels::getLevel1()), map(level.getMapConfigFilename()), player() {
+    window(window), map(), player() {
+
+    // Static functions initialization
+    PredefinedLevels::generateLevels();
     // Textures will load only once, since Game class is a singleton
     Game::loadTextures();
+
+    // Load the level
+    level = PredefinedLevels::getLevel("level1");
+    std::cout << "Harta: " << level.getMapConfigFilename() << std::endl;
+    map = Map(level.getMapConfigFilename());
+    std::cout << "Am incarcat mapa'\n";
 
     sf::Vector2f cellSize = map.getCellSize();
     player.setSize(cellSize);

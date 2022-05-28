@@ -26,7 +26,7 @@ private:
 public:
     // constructors
     Map();
-    [[maybe_unused]] explicit Map(const std::string &);   // config file
+    explicit Map(const std::string &);   // config file
     [[maybe_unused]] Map(const Map &);
 
     // destructor
