@@ -7,11 +7,17 @@
 // constructors
 Game::Game(sf::RenderWindow &window, const std::string & configFile) :
     window(window), map(configFile), player() {
+    // Textures will load only once, since Game class is a singleton
+    Game::loadTextures();
+
     sf::Vector2f cellSize = map.getCellSize();
     player.setSize(cellSize);
 }
 
-[[maybe_unused]] Game::Game(const Game &rhs) = default;
+Game &Game::getGame(sf::RenderWindow &window, const std::string &configFile) {
+    static Game game(window, configFile);
+    return game;
+}
 
 // destructor
 Game::~Game() = default;

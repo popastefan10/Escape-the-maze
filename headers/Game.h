@@ -14,15 +14,19 @@
 #include <SFML/System.hpp>
 #include <iostream>
 
+// Singleton
 class Game {
     sf::RenderWindow &window;
     Map map;
     Player player;
 
+private:
+    explicit Game(sf::RenderWindow &, const std::string &);
+
 public:
-    // constructors
-    [[maybe_unused]] explicit Game(sf::RenderWindow &, const std::string &);
-    [[maybe_unused]] Game(const Game &);
+    Game(const Game &) = delete;
+    Game & operator = (const Game &) = delete;
+    static Game & getGame(sf::RenderWindow &, const std::string &);
 
     // destructor
     ~Game();
