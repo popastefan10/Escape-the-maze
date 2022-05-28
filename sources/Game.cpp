@@ -50,7 +50,6 @@ void Game::start() {
 
     bool finishedLevel = false;
     bool loadingNextLevel = false;
-    bool startedNewLevel = true;
     bool gameWon = false;
 
     sf::Time timeElapsedToBeatLevel;
@@ -91,7 +90,7 @@ void Game::start() {
                         break;
                 }
 
-                if(!finishedLevel && startedNewLevel && map.isInside(playerPosition) && map.canWalkOn(playerPosition))
+                if(!finishedLevel && map.isInside(playerPosition) && map.canWalkOn(playerPosition))
                     player.setPosition(playerPosition);
                 if(playerPosition == endPosition)
                     finishedLevel = true;
