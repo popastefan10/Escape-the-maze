@@ -41,9 +41,8 @@ void Game::start() {
 
     std::vector< std::string > levelIDs = {
         "level1",
-        "level1",
-//        "level2",
-//        "level3",
+        "level2",
+        "level3",
     };
     int currentLevelIdx = 0;
     loadLevel(levelIDs[currentLevelIdx]);
