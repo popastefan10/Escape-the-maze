@@ -34,7 +34,7 @@ FetchContent_MakeAvailable(SFML)
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp sources/Map.cpp headers/Map.h sources/Cell.cpp headers/Cell.h sources/Game.cpp headers/Game.h sources/Player.cpp headers/Player.h sources/TextureHolder.cpp headers/TextureHolder.h sources/WallCell.cpp headers/WallCell.h sources/UndefinedCell.cpp headers/UndefinedCell.h sources/FloorCell.cpp headers/FloorCell.h headers/Exceptions.h sources/Exceptions.cpp sources/Util.cpp headers/Util.h)
+add_executable(${PROJECT_NAME} main.cpp sources/Map.cpp headers/Map.h sources/Cell.cpp headers/Cell.h sources/Game.cpp headers/Game.h sources/Player.cpp headers/Player.h sources/TextureHolder.cpp headers/TextureHolder.h sources/WallCell.cpp headers/WallCell.h sources/UndefinedCell.cpp headers/UndefinedCell.h sources/FloorCell.cpp headers/FloorCell.h headers/Exceptions.h sources/Exceptions.cpp sources/Util.cpp headers/Util.h sources/Level.cpp headers/Level.h)
 
 ###############################################################################
 
